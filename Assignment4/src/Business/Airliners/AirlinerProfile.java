@@ -5,8 +5,8 @@
  */
 package Business.Airliners;
 
-import Business.Airplane.Flight.Flight;
-import Business.Airplane.Flight.FlightSchedule;
+import Business.Flight.Flight;
+import Business.Flight.FlightSchedule;
 import java.util.ArrayList;
 
 /**
@@ -22,15 +22,24 @@ public class AirlinerProfile {
     public AirlinerProfile(){
     
     }
-    public AirlinerProfile(Airliner airliner,FlightSchedule flightSchedule){
+    public AirlinerProfile(Airliner airliner){
+        
         airlinerFlightList=new ArrayList<Flight> ();
         this.airlinerName=airliner.getAirlinerName();
         this.airliner=airliner;
-        //利用公司名字搜索出所有属于该公司的flight list
-        this.airlinerFlightList=flightSchedule.getAirlinerFlightList(airlinerName);
+       
 
     
     }
+
+    public String getAirlinerName() {
+        return airlinerName;
+    }
+
+    public void setAirlinerName(String airlinerName) {
+        this.airlinerName = airlinerName;
+    }
+    
 
     public Airliner getAirliner() {
         return airliner;

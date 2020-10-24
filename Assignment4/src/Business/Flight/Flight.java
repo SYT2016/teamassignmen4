@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.Airplane.Flight;
+package Business.Flight;
 
 import Util.Address;
 import Business.Airplane.Airplane;
+import Business.Travel.Seat;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,6 +22,8 @@ public class Flight {
     private String arriveTime;
     private Address takeoffPlace;//起飞的国家，城市，机场
     private Address arrivePlace;//到达的国家，城市，机场
+    private ArrayList<Seat> seatlist;
+    private int totalSeatNumber;
     
     public Flight(){
     
@@ -31,9 +35,16 @@ public class Flight {
         this.takeoffPlace=takeoffPlace;
         this.arriveTime=arriveTime;
         this.arrivePlace=arrivePlace;
+        //往seatlist里面加座椅
+        seatlist=new ArrayList<Seat>();
+        for(int i=0;i<totalSeatNumber;i++){
+            seatlist.add(new Seat());
+        
+        }
+        
     
     }
-
+    
     public String getAirlinerName() {
         return airlinerName;
     }
