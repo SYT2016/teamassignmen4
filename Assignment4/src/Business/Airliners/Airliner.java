@@ -24,11 +24,13 @@ public class Airliner {
     
     }
     
-    public Airliner(String airlinerName,Address airlinerPlace,int airplanenumber,ArrayList<Airplane> airplaneList){
+    public Airliner(String airlinerName,Address airlinerPlace){
         this.airlinerName=airlinerName;
         this.airlinerPlace=airlinerPlace;
-        this.airplanenumber=airplanenumber;
-        this.airplaneList= airplaneList;
+        airplaneList = new ArrayList<>();
+        this.airplanenumber=airplaneList.size();
+        //this.airplaneList= airplaneList;
+        //airplaneList = new ArrayList<>();
     
     }
 

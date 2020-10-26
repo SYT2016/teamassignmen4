@@ -13,17 +13,17 @@ package Business.Airplane;
 public class Airplane {
     private String airplaneID;
     private String airplaneModel;
-    private boolean isFood;
+    //private boolean isFood;
     private int airplaneage;
     private int numOfSeats;
     public Airplane(){
     
     }
     
-    public Airplane(String airplaneID,String airplaneModel,boolean isFood,int airplaneage,int numofseats){
+    public Airplane(String airplaneID,String airplaneModel,int airplaneage,int numofseats){
         this.airplaneID=airplaneID;
         this.airplaneModel=airplaneModel;
-        this.isFood=isFood;
+        //this.isFood=isFood;
         this.airplaneage=airplaneage;
         this.numOfSeats=numofseats;
     }
@@ -43,13 +43,13 @@ public class Airplane {
         this.airplaneModel = airplaneModel;
     }
 
-    public boolean isIsFood() {
-        return isFood;
-    }
-
-    public void setIsFood(boolean isFood) {
-        this.isFood = isFood;
-    }
+//    public boolean isIsFood() {
+//        return isFood;
+//    }
+//
+//    public void setIsFood(boolean isFood) {
+//        this.isFood = isFood;
+//    }
 
     public int getAirplaneage() {
         return airplaneage;
