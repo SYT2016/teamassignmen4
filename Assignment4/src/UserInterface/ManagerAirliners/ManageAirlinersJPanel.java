@@ -5,17 +5,38 @@
  */
 package UserInterface.ManagerAirliners;
 
+import Business.Airliners.Airliner;
+import Business.Flight.Flight;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+
 /**
  *
  * @author admin
  */
 public class ManageAirlinersJPanel extends javax.swing.JPanel {
 
+    private final JPanel cardSequenceJPanel;
+
+    private final Airliner airliner;
+
     /**
      * Creates new form ManageAirlinersJPanel
      */
-    public ManageAirlinersJPanel() {
+    public ManageAirlinersJPanel(JPanel cardSequenceJPanel, Airliner airliner) {
+        this.cardSequenceJPanel = cardSequenceJPanel;
+        this.airliner = airliner;
         initComponents();
+        refreshTable();
+    }
+
+    public static void show(JPanel cardSequenceJPanel, Airliner airliner) {
+        ManageAirlinersJPanel createAirlinerJPanel = new ManageAirlinersJPanel(cardSequenceJPanel, airliner);
+        cardSequenceJPanel.add("CreateAirlinerJPanel", createAirlinerJPanel);
+        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+        layout.next(cardSequenceJPanel);
     }
 
     /**
@@ -28,18 +49,58 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnAddAirPlane = new javax.swing.JButton();
-        btnViewAirLiners = new javax.swing.JButton();
+        btnAddFlight = new javax.swing.JButton();
+        btnViewFlightDetails = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblFlightDetails = new javax.swing.JTable();
+        btnBack = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel1.setText("Manage your airliner");
 
-        btnAddAirPlane.setText("Add your airplane");
-
-        btnViewAirLiners.setText("View your Airplane details");
-        btnViewAirLiners.addActionListener(new java.awt.event.ActionListener() {
+        btnAddFlight.setText("Add your fight");
+        btnAddFlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewAirLinersActionPerformed(evt);
+                btnAddFlightActionPerformed(evt);
+            }
+        });
+
+        btnViewFlightDetails.setText("View your filght details");
+        btnViewFlightDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewFlightDetailsActionPerformed(evt);
+            }
+        });
+
+        tblFlightDetails.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Flight No", "Take off", "Landing", "Take off time", "Landing time"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblFlightDetails);
+        if (tblFlightDetails.getColumnModel().getColumnCount() > 0) {
+            tblFlightDetails.getColumnModel().getColumn(0).setResizable(false);
+            tblFlightDetails.getColumnModel().getColumn(1).setResizable(false);
+            tblFlightDetails.getColumnModel().getColumn(2).setResizable(false);
+            tblFlightDetails.getColumnModel().getColumn(3).setResizable(false);
+            tblFlightDetails.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
             }
         });
 
@@ -50,36 +111,78 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
+                        .addGap(107, 107, 107)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAddFlight)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnViewFlightDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(230, 230, 230)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(btnAddAirPlane)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnViewAirLiners, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addGap(24, 24, 24)
+                        .addComponent(btnBack)))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(22, 22, 22)
+                .addComponent(btnBack)
+                .addGap(4, 4, 4)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddAirPlane)
-                    .addComponent(btnViewAirLiners))
-                .addContainerGap(203, Short.MAX_VALUE))
+                    .addComponent(btnViewFlightDetails)
+                    .addComponent(btnAddFlight))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnViewAirLinersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAirLinersActionPerformed
+    private void btnViewFlightDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewFlightDetailsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnViewAirLinersActionPerformed
+    }//GEN-LAST:event_btnViewFlightDetailsActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    public void refreshTable() {
+        int rowCount = tblFlightDetails.getRowCount();
+        DefaultTableModel model = (DefaultTableModel)tblFlightDetails.getModel();
+        for(int i=rowCount-1;i>=0;i--) {
+            model.removeRow(i);
+        }
+        for(Flight flight : airliner.getFlightList()) {
+            Object[] row = new Object[6];
+            row[0] = flight.getFlightNumber();
+            row[1] = flight.getTakeOffPlace().toString();
+            row[2] = flight.getLandingPlace().toString();
+            row[3] = flight.getTakeOffTime();
+            row[4] = flight.getLandingTime();
+            row[5] = flight;
+            model.addRow(row);
+        }
+    }
+
+    private void btnAddFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddFlightActionPerformed
+        AddAirplaneJPanel addAirplaneJPanel = new AddAirplaneJPanel(this.cardSequenceJPanel, airliner);
+        this.cardSequenceJPanel.add("AddAirplaneJPanel", addAirplaneJPanel);
+        CardLayout layout = (CardLayout) this.cardSequenceJPanel.getLayout();
+        layout.next(this.cardSequenceJPanel);
+    }//GEN-LAST:event_btnAddFlightActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddAirPlane;
-    private javax.swing.JButton btnViewAirLiners;
+    private javax.swing.JButton btnAddFlight;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnViewFlightDetails;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblFlightDetails;
     // End of variables declaration//GEN-END:variables
 }

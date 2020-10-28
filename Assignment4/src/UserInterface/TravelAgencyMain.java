@@ -5,6 +5,11 @@
  */
 package UserInterface;
 
+import UserInterface.ManagerAirliners.CreateAirlinerJPanel;
+
+import javax.swing.*;
+import java.awt.*;
+
 /**
  *
  * @author admin
@@ -28,33 +33,38 @@ public class TravelAgencyMain extends javax.swing.JFrame {
     private void initComponents() {
 
         jSplitPane1 = new javax.swing.JSplitPane();
-        CardSequenceJPanel = new javax.swing.JPanel();
+        cardSequenceJPanel = new javax.swing.JPanel();
         jPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        CardSequenceJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jSplitPane1.setRightComponent(CardSequenceJPanel);
+        cardSequenceJPanel.setLayout(new java.awt.CardLayout());
+        jSplitPane1.setRightComponent(cardSequenceJPanel);
 
         jPanel.setLayout(new java.awt.CardLayout());
 
-        jButton2.setText("jButton2");
+        btnAdd.setText("Create Airliner");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton2)
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addComponent(btnAdd)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(114, 114, 114)
-                .addComponent(jButton2)
+                .addComponent(btnAdd)
                 .addContainerGap(457, Short.MAX_VALUE))
         );
 
@@ -75,6 +85,13 @@ public class TravelAgencyMain extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        CreateAirlinerJPanel createAirlinerJPanel = new CreateAirlinerJPanel(this.cardSequenceJPanel);
+        this.cardSequenceJPanel.add("CreateAirlinerJPanel", createAirlinerJPanel);
+        CardLayout layout = (CardLayout) this.cardSequenceJPanel.getLayout();
+        layout.next(this.cardSequenceJPanel);
+    }//GEN-LAST:event_btnAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,10 +129,15 @@ public class TravelAgencyMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel CardSequenceJPanel;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JPanel cardSequenceJPanel;
+    private javax.swing.JButton btnAdd;
     private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     // End of variables declaration//GEN-END:variables
+
+
+    public JPanel getCardSequenceJPanel() {
+        return cardSequenceJPanel;
+    }
 }

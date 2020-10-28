@@ -6,50 +6,56 @@
 package Util;
 
 /**
- *
  * @author 16104   1026测试
  */
 public class Address {
-    private String Country;
-    private String City;
-    private String airportname;
-    public Address(){
+    private String country;
+    private String city;
+    private String airportName;
+
+    public Address() {
     }
-    public Address(String Country,String City,String airportname){//起飞，降落机场
-        this.Country=Country;
-        this.City=City;
-        this.airportname=airportname;
-    
+
+    public Address(String Country, String City, String airportName) {//起飞，降落机场
+        this.country = Country;
+        this.city = City;
+        this.airportName = airportName;
+
     }
-     public Address(String Country,String City){//公司地点
-        this.Country=Country;
-        this.City=City;
-       
-    
+
+    public Address(String Country, String City) {//公司地点
+        this.country = Country;
+        this.city = City;
+
+
     }
 
     public String getCountry() {
-        return Country;
+        return country;
     }
 
     public void setCountry(String Country) {
-        this.Country = Country;
+        this.country = Country;
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
     public void setCity(String City) {
-        this.City = City;
+        this.city = City;
     }
 
-    public String getAirportname() {
-        return airportname;
+    public String getAirportName() {
+        return airportName;
     }
 
-    public void setAirportname(String airportname) {
-        this.airportname = airportname;
+    public void setAirportName(String airportName) {
+        this.airportName = airportName;
     }
-    
+
+    @Override
+    public String toString() {
+        return country + " " + city;
+    }
 }

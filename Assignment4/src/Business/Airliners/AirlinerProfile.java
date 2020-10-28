@@ -6,7 +6,7 @@
 package Business.Airliners;
 
 import Business.Flight.Flight;
-import Business.Flight.FlightSchedule;
+
 import java.util.ArrayList;
 
 /**
@@ -25,7 +25,7 @@ public class AirlinerProfile {
     public AirlinerProfile(Airliner airliner){
         
         airlinerFlightList=new ArrayList<Flight> ();
-        this.airlinerName=airliner.getAirlinerName();
+        this.airlinerName=airliner.getName();
         this.airliner=airliner;
        
 
