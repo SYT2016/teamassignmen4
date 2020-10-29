@@ -5,6 +5,7 @@
  */
 package UserInterface.ManageCustomers;
 
+
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -14,10 +15,12 @@ import javax.swing.JPanel;
  */
 public class BookFlightJPanel extends javax.swing.JPanel {
 
+
     private JPanel cardSequence;
     public BookFlightJPanel(JPanel cardSequence) {
         initComponents();
         this.cardSequence=cardSequence;
+=
     }
 
     /**
@@ -52,7 +55,9 @@ public class BookFlightJPanel extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         comboRow = new javax.swing.JComboBox<>();
         comboColumn = new javax.swing.JComboBox<>();
+
         btnSubmit = new javax.swing.JButton();
+
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -126,6 +131,7 @@ public class BookFlightJPanel extends javax.swing.JPanel {
         comboColumn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Window", "Middle", "Aisle" }));
         add(comboColumn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 500, -1, -1));
 
+
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,9 +152,12 @@ public class BookFlightJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBack;
+
     private javax.swing.JButton btnSubmit;
+
     private javax.swing.JComboBox<String> comboColumn;
     private javax.swing.JComboBox<String> comboRow;
     private javax.swing.JLabel jLabel1;
