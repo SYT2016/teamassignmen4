@@ -5,11 +5,14 @@
  */
 package UserInterface.ManageCustomers;
 
+import Business.Customer.AssignCusToFlightList;
 import Business.Customer.CustomeProfileList;
 import Business.Customer.CustomerProfile;
 import Business.Flight.FlightSchedule;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,21 +25,23 @@ public class ViewCusProfilesJPanel extends javax.swing.JPanel {
     private JPanel cardSequence;
     private CustomeProfileList cusPros;
     private FlightSchedule flightSchedule;
-    public ViewCusProfilesJPanel(JPanel cardSequence,CustomeProfileList cusPros,FlightSchedule flightSchedule) {
+    private AssignCusToFlightList assignList;
+    public ViewCusProfilesJPanel(JPanel cardSequence,CustomeProfileList cusPros,FlightSchedule flightSchedule,AssignCusToFlightList assignList) {
         initComponents();
         this.cardSequence=cardSequence;
         this.cusPros=cusPros;
         this.flightSchedule= flightSchedule;
-        populate();
+        this.assignList=assignList;
+        populate(cusPros.getCustomerProfileList());
     }
     
-    public void populate(){
+    public void populate(ArrayList<CustomerProfile> l){
         DefaultTableModel dtm=(DefaultTableModel)tblCusPro.getModel();
         dtm.setRowCount(0);
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         for(CustomerProfile cp:cusPros.getCustomerProfileList()){
             Object[] row=new Object[6];
-            row[0]=cp.getCustomer().getName();
+            row[0]=cp;
             row[1]=cp.getCustomer().getPhone();
             row[2]=cp.getFrom().toString();
             row[3]=cp.getTo().toString();
@@ -60,6 +65,7 @@ public class ViewCusProfilesJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnSearchFlights = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        btnNotBook = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -94,13 +100,29 @@ public class ViewCusProfilesJPanel extends javax.swing.JPanel {
             }
         });
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+
+        btnNotBook.setText("Without Booking");
+        btnNotBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNotBookActionPerformed(evt);
+            }
+        });
+        add(btnNotBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchFlightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchFlightsActionPerformed
-        SearchFlightsJPanel jp=new SearchFlightsJPanel(cardSequence, flightSchedule);
-        cardSequence.add("SearchFlightsJPanel",jp);
-        CardLayout l=(CardLayout)cardSequence.getLayout();
-        l.next(cardSequence);
+        int selectedRow=tblCusPro.getSelectedRow();
+        if(selectedRow<0){
+            JOptionPane.showMessageDialog(null, "Please select a row");
+        }
+        else{
+            CustomerProfile cp=(CustomerProfile)tblCusPro.getValueAt(selectedRow, 0);
+            SearchFlightsJPanel jp=new SearchFlightsJPanel(cardSequence, flightSchedule,cp,assignList);
+            cardSequence.add("SearchFlightsJPanel",jp);
+            CardLayout l=(CardLayout)cardSequence.getLayout();
+            l.next(cardSequence);
+        }
+        
     }//GEN-LAST:event_btnSearchFlightsActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -109,9 +131,14 @@ public class ViewCusProfilesJPanel extends javax.swing.JPanel {
         layout.previous(cardSequence);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnNotBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotBookActionPerformed
+        populate(cusPros.getNotBookList());
+    }//GEN-LAST:event_btnNotBookActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnNotBook;
     private javax.swing.JButton btnSearchFlights;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

@@ -7,12 +7,10 @@ package UserInterface.ManageCustomers;
 
 import Business.Customer.Customer;
 import Business.Customer.CustomerDirectory;
-
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 
 /**
  *
@@ -21,12 +19,11 @@ import javax.swing.JPanel;
 public class CreateNewCustomerJpanel extends javax.swing.JPanel {
 
     private CustomerDirectory customerDirectory;
-
     private JPanel cardSequence;
-    public CreateNewCustomerJpanel(JPanel cardSequence) {
+    public CreateNewCustomerJpanel(JPanel cardSequence,CustomerDirectory customerDirectory) {
         initComponents();
         this.cardSequence=cardSequence;
-
+        this.customerDirectory=customerDirectory;
     }
 
     /**
@@ -48,11 +45,9 @@ public class CreateNewCustomerJpanel extends javax.swing.JPanel {
         radioBtnMale = new javax.swing.JRadioButton();
         radioBtnFemale = new javax.swing.JRadioButton();
         btnSave = new javax.swing.JButton();
-
         btnBack = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
-
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -88,7 +83,6 @@ public class CreateNewCustomerJpanel extends javax.swing.JPanel {
                 btnSaveActionPerformed(evt);
             }
         });
-
         add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, -1, -1));
 
         btnBack.setText("<< Back");
@@ -102,7 +96,6 @@ public class CreateNewCustomerJpanel extends javax.swing.JPanel {
         jLabel2.setText("Phone:");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, -1, -1));
         add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, 210, 30));
-
     }// </editor-fold>//GEN-END:initComponents
 
     private void radioBtnMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnMaleActionPerformed
@@ -116,7 +109,6 @@ public class CreateNewCustomerJpanel extends javax.swing.JPanel {
         c.setCustomerID(txtID.getText());
         if(radioBtnMale.isSelected()) c.setGender(radioBtnMale.getText());
         else c.setGender(radioBtnFemale.getText());
-
         c.setPhone(txtPhone.getText());
         JOptionPane.showMessageDialog(null, "Save Successfully!");
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -133,7 +125,6 @@ public class CreateNewCustomerJpanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -143,6 +134,5 @@ public class CreateNewCustomerJpanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPhone;
-
     // End of variables declaration//GEN-END:variables
 }
