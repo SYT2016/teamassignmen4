@@ -5,17 +5,48 @@
  */
 package UserInterface.ManageCustomers;
 
+import Business.Customer.CustomerProfile;
+import Business.Flight.Flight;
+import Business.Flight.FlightSchedule;
+import java.awt.CardLayout;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author admin
  */
 public class SearchFlightsJPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form SearchFlightsJPanel
-     */
-    public SearchFlightsJPanel() {
+
+    private JPanel cardSequence;
+    private FlightSchedule flightSchedule;
+    public SearchFlightsJPanel(JPanel cardSequence,FlightSchedule flightSchedule) {
         initComponents();
+        this.cardSequence=cardSequence;
+        this.flightSchedule=flightSchedule;
+        populate(flightSchedule.getFlightList());
+    }
+    
+    public void populate(ArrayList<Flight> l){
+        DefaultTableModel dtm=(DefaultTableModel)tblSearchFlights.getModel();
+        dtm.setRowCount(0);
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        for(Flight f:l){
+            Object[] row=new Object[4];
+            row[0]=f.getFlightNumber();
+            row[1]=sdf.format(f.getTakeOffTime());
+            row[2]=sdf.format(f.getLandingTime());
+            row[3]=f.getAirlinerName();
+            dtm.addRow(row);
+        }
+
     }
 
     /**
@@ -31,12 +62,14 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         txtYear = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+
+        comboMonth = new javax.swing.JComboBox<>();
         txtDay = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        BtnBook = new javax.swing.JButton();
+        tblSearchFlights = new javax.swing.JTable();
+        btnBook = new javax.swing.JButton();
+
         BtnBack = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -54,16 +87,18 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Search By Date:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }));
 
-        jButton1.setText("Search");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        comboMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }));
+
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblSearchFlights.setModel(new javax.swing.table.DefaultTableModel(
+
             new Object [][] {
 
             },
@@ -79,18 +114,20 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(3).setResizable(false);
+
+        jScrollPane2.setViewportView(tblSearchFlights);
+        if (tblSearchFlights.getColumnModel().getColumnCount() > 0) {
+            tblSearchFlights.getColumnModel().getColumn(0).setResizable(false);
+            tblSearchFlights.getColumnModel().getColumn(1).setResizable(false);
+            tblSearchFlights.getColumnModel().getColumn(2).setResizable(false);
+            tblSearchFlights.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        BtnBook.setText("Book");
-        BtnBook.addActionListener(new java.awt.event.ActionListener() {
+        btnBook.setText("Book");
+        btnBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnBookActionPerformed(evt);
+                btnBookActionPerformed(evt);
+
             }
         });
 
@@ -109,7 +146,9 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
                 .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtnBack)
-                    .addComponent(BtnBook)
+
+                    .addComponent(btnBook)
+
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane2)
                         .addGroup(layout.createSequentialGroup()
@@ -117,11 +156,13 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
                             .addGap(18, 18, 18)
                             .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+
+                            .addComponent(comboMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(txtDay, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(106, 106, 106)
-                            .addComponent(jButton1))))
+                            .addComponent(btnSearch))))
+
                 .addContainerGap(135, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -133,40 +174,62 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+
+                    .addComponent(comboMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnSearch))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(BtnBook)
+                .addComponent(btnBook)
+
                 .addContainerGap(239, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void BtnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBookActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnBookActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        Date d=new Date();
+        try {
+            d=sdf.parse(txtYear.getText()+comboMonth.getSelectedItem().toString()+txtDay.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(SearchFlightsJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ArrayList<Flight> l=flightSchedule.getFlightListThroughDate(d);
+        populate(l);
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookActionPerformed
+        BookFlightJPanel jp=new BookFlightJPanel(cardSequence);
+        cardSequence.add("BookFlightJPanel",jp);
+        CardLayout l=(CardLayout)cardSequence.getLayout();
+        l.next(cardSequence);
+    }//GEN-LAST:event_btnBookActionPerformed
 
     private void BtnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBackActionPerformed
-        // TODO add your handling code here:
+        cardSequence.remove(this);
+        CardLayout layout=(CardLayout)cardSequence.getLayout();
+        layout.previous(cardSequence);
+
     }//GEN-LAST:event_BtnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBack;
-    private javax.swing.JButton BtnBook;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+
+    private javax.swing.JButton btnBook;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JComboBox<String> comboMonth;
+
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+
+    private javax.swing.JTable tblSearchFlights;
+
     private javax.swing.JTextField txtDay;
     private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables

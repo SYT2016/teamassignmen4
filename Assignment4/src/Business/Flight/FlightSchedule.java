@@ -34,6 +34,13 @@ public class FlightSchedule {
 
     }
 
+    
+    public Flight addFlight(){
+        Flight flight=new Flight();
+        FlightList.add(flight);
+        return flight;
+    }
+
     /**
      * 新增flight的时候，把这个flight加入到对应Airliner中的flight list里（把这个航班加入到对应公司旗下）
      */
@@ -45,6 +52,7 @@ public class FlightSchedule {
 //        }
 
     }
+
 
     public void deleteFlight(Flight flight) {
         FlightList.remove(flight);
@@ -75,6 +83,18 @@ public class FlightSchedule {
 
         }
         return airlinerflightlist;
+
+
+    }
+    
+    public ArrayList<Flight> getFlightListThroughDate(Date d){
+        ArrayList<Flight> l=new ArrayList<Flight>();
+        for(Flight f:FlightList){
+            if(f.getTakeOffTime().before(d)){
+                l.add(f);
+            }
+        }
+        return l;
 
     }
 
