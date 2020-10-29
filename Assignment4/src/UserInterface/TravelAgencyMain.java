@@ -5,10 +5,19 @@
  */
 package UserInterface;
 
+import Business.Airliners.Airliner;
+import Business.Airliners.AirlinerDirectory;
+import Business.Airliners.AirlinerProfile;
+import Business.Airliners.AirlinerProfileList;
+import Business.Airplane.Airplane;
+import Business.Flight.Flight;
+import UserInterface.ManagerAirliners.AirlinerLoginJPanel;
 import UserInterface.ManagerAirliners.CreateAirlinerJPanel;
+import Util.Address;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Calendar;
 
 /**
  *
@@ -37,6 +46,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         jPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
+        btnLogInAirliner = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,6 +62,13 @@ public class TravelAgencyMain extends javax.swing.JFrame {
             }
         });
 
+        btnLogInAirliner.setText("Log in Airliner");
+        btnLogInAirliner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogInAirlinerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -59,13 +76,18 @@ public class TravelAgencyMain extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(btnAdd)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(btnLogInAirliner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(114, 114, 114)
                 .addComponent(btnAdd)
-                .addContainerGap(457, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(btnLogInAirliner)
+                .addContainerGap(400, Short.MAX_VALUE))
         );
 
         jPanel.add(jPanel1, "card2");
@@ -86,12 +108,24 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        CreateAirlinerJPanel createAirlinerJPanel = new CreateAirlinerJPanel(this.cardSequenceJPanel);
-        this.cardSequenceJPanel.add("CreateAirlinerJPanel", createAirlinerJPanel);
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
+        // T:event_btnAddActionPerformed
+          CreateAirlinerJPanel createAirlinerJPanel = new CreateAirlinerJPanel(this.cardSequenceJPanel);
+          this.cardSequenceJPanel.add("CreateAirlinerJPanel", createAirlinerJPanel);
+          CardLayout layout = (CardLayout) this.cardSequenceJPanel.getLayout();
+          layout.next(this.cardSequenceJPanel);
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnLogInAirlinerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInAirlinerActionPerformed
+//        CreateAirlinerJPanel createAirlinerJPanel = new CreateAirlinerJPanel(this.cardSequenceJPanel);
+//        this.cardSequenceJPanel.add("CreateAirlinerJPanel", createAirlinerJPanel);
+//        CardLayout layout = (CardLayout) this.cardSequenceJPanel.getLayout();
+//        layout.next(this.cardSequenceJPanel);
+        AirlinerLoginJPanel airlinerLoginJPanel = new AirlinerLoginJPanel(this.cardSequenceJPanel);
+        this.cardSequenceJPanel.add("AirlinerLoginJPanel", airlinerLoginJPanel);
         CardLayout layout = (CardLayout) this.cardSequenceJPanel.getLayout();
         layout.next(this.cardSequenceJPanel);
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_btnLogInAirlinerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,14 +157,34 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                initTest();
                 new TravelAgencyMain().setVisible(true);
             }
         });
     }
 
+    private static void initTest() {
+        Airliner airliner = new Airliner("China", "China", "Beijing", "123");
+        AirlinerDirectory.addAirliner(airliner);
+
+        Airplane airplane = new Airplane("000001", "S", 1, 120);
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.set(2020, Calendar.OCTOBER, 30, 10, 20);
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.set(2020, Calendar.OCTOBER, 30, 13, 40);
+        Flight flight = new Flight("CA8688",
+                new Airliner("China", "China", "Beijing", "123"), airplane,
+                calendar1.getTime(), calendar2.getTime(),
+                new Address("China", "Shanghai"), new Address("China", "Shangzhi"));
+        airliner.addFlight(flight);
+
+        AirlinerProfileList.addAirlinerProfile(new AirlinerProfile(airliner, flight, airplane));
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel cardSequenceJPanel;
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnLogInAirliner;
     private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;

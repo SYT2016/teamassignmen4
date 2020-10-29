@@ -9,8 +9,9 @@ import Business.Flight.Flight;
 import Util.Address;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import Business.Airplane.Airplane;
+import java.util.Map;
 
 /**
  *
@@ -22,19 +23,14 @@ public class Airliner {
     private Address address;
     private int airplaneNumber;
     private String password;
-    private List<Flight> flightList = new ArrayList<>();
-    private List<Airplane>  airplaneList = new ArrayList<>();
-
-    public List<Airplane> getAirplaneList() {
-        return airplaneList;
-    }
-
-    public void setAirplaneList(List<Airplane> airplaneList) {
-        this.airplaneList = airplaneList;
-    }
+    private Map<String, Flight> flightList = new HashMap<>();
 
     public void addFlight(Flight flight) {
-        flightList.add(flight);
+        flightList.put(flight.getFlightNumber(), flight);
+    }
+
+    public void replaceFlight(Flight flight1, Flight flight2) {
+        this.flightList.put(flight1.getFlightNumber(), flight2);
     }
 
     public Airliner(String name, String country, String city, String password){
@@ -69,11 +65,7 @@ public class Airliner {
     }
 
     public List<Flight> getFlightList() {
-        return flightList;
-    }
-
-    public void setFlightList(List<Flight> flightList) {
-        this.flightList = flightList;
+        return new ArrayList<>(flightList.values());
     }
 
     public String getPassword() {
