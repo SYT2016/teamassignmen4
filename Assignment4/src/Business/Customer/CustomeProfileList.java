@@ -14,6 +14,9 @@ import java.util.ArrayList;
 //游客的所有行程
 public class CustomeProfileList {
     private ArrayList<CustomerProfile> customerProfileList;
+    public CustomeProfileList(){
+        customerProfileList=new ArrayList<>();
+    }
 
     public ArrayList<CustomerProfile> getCustomerProfileList() {
         return customerProfileList;
@@ -21,6 +24,14 @@ public class CustomeProfileList {
 
     public void setCustomerProfileList(ArrayList<CustomerProfile> customerProfileList) {
         this.customerProfileList = customerProfileList;
+    }
+    
+    public ArrayList<CustomerProfile> getNotBookList(){
+        ArrayList<CustomerProfile> l=new ArrayList<>();
+        for(CustomerProfile cp:customerProfileList){
+            if(!cp.getIsBookFlight()) l.add(cp);
+        }
+        return l;
     }
     
 }

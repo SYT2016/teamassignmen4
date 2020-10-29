@@ -10,6 +10,7 @@ import Util.Address;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 16104
@@ -33,7 +34,6 @@ public class FlightSchedule {
         return flight;
 
     }
-
     
     public Flight addFlight(){
         Flight flight=new Flight();
@@ -52,7 +52,6 @@ public class FlightSchedule {
 //        }
 
     }
-
 
     public void deleteFlight(Flight flight) {
         FlightList.remove(flight);
@@ -84,7 +83,6 @@ public class FlightSchedule {
         }
         return airlinerflightlist;
 
-
     }
     
     public ArrayList<Flight> getFlightListThroughDate(Date d){
@@ -95,7 +93,6 @@ public class FlightSchedule {
             }
         }
         return l;
-
     }
 
     public ArrayList<Flight> getFlightList() {

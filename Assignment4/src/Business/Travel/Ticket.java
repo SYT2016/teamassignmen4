@@ -15,6 +15,11 @@ import Util.Address;
 public class Ticket {
     private Seat seat;
     private Flight flight;
+    
+    public Ticket(Seat seat,Flight flight){
+        this.seat=seat;
+        this.flight=flight;
+    }
 
     public Seat getSeat() {
         return seat;

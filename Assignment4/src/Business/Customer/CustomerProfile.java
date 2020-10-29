@@ -9,7 +9,6 @@ import Business.Travel.Ticket;
 import Util.Address;
 import java.util.Date;
 
-
 /**
  *
  * @author 16104
@@ -21,6 +20,12 @@ public class CustomerProfile {
     private Address to;
     private Date departTime;
     private Date backTime;
+    private boolean isBookFlight;
+    
+    @Override
+    public String toString(){
+        return customer.getName();
+    }
 
     public Customer getCustomer() {
         return customer;
@@ -60,6 +65,14 @@ public class CustomerProfile {
 
     public void setBackTime(Date backTime) {
         this.backTime = backTime;
+    }
+
+    public boolean getIsBookFlight() {
+        return isBookFlight;
+    }
+
+    public void setIsBookFlight(boolean isBookFlight) {
+        this.isBookFlight = isBookFlight;
     }
     
     
