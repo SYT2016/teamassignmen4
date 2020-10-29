@@ -5,6 +5,8 @@
  */
 package Business.Customer;
 
+import Business.Travel.Ticket;
+
 /**
  *
  * @author 16104

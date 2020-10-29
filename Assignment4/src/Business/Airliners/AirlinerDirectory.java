@@ -6,26 +6,23 @@
 package Business.Airliners;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
+ * 存储里面是AirlinerProfile的arraylist，相当于全中国所有的航空空司的信息
+ * AirlinerProfile里面包括航空公司名字+一个航空公司的详细信息+该航空公司旗下的所有Flight的List
  *
- * @author 16104
+ * @author Cong
  */
-//存储里面是AirlinerProfile的arraylist，相当于全中国所有的航空空司的信息
-//AirlinerProfile里面包括航空公司名字+一个航空公司的详细信息+该航空公司旗下的所有Flight的List
 public class AirlinerDirectory {
-    private ArrayList<AirlinerProfile> airlinerProfilelist;
 
-    public ArrayList<AirlinerProfile> getAirlinerProfilelist() {
-        return airlinerProfilelist;
+    private static final ArrayList<Airliner> AIRLINER_LIST = new ArrayList<>();
+
+    public static void addAirliner(Airliner airliner) {
+        AIRLINER_LIST.add(airliner);
     }
 
-    public void setAirlinerProfilelist(ArrayList<AirlinerProfile> airlinerProfilelist) {
-        this.airlinerProfilelist = airlinerProfilelist;
+    public List<Airliner> getAirlinerList() {
+        return AIRLINER_LIST;
     }
-    
-    
-    
-    
-    
 }

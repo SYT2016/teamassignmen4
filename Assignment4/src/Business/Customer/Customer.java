@@ -18,18 +18,18 @@ public class Customer {
     private String name;
     private int age;
     private String gender;
-    private ArrayList<Ticket> customerTicketList;//该用户购买的所有ticket list
+    private String phone;
+    private ArrayList<Ticket> customerTicketList;//该用户被分配的所有tickets
     
     public Customer(){
     }
-    public Customer(String customerID,String name,int age,String gender){
+    public Customer(String customerID,String name,int age,String gender,String phone){
         this.age=age;
         this.customerID=customerID;
         this.gender=gender;
         this.name=name;
+        this.phone=phone;
         customerTicketList=new ArrayList<Ticket>();
-        
-    
     }
 
     public String getCustomerID() {
@@ -62,6 +62,22 @@ public class Customer {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public ArrayList<Ticket> getCustomerTicketList() {
+        return customerTicketList;
+    }
+
+    public void setCustomerTicketList(ArrayList<Ticket> customerTicketList) {
+        this.customerTicketList = customerTicketList;
     }
     
     

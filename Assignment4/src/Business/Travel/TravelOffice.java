@@ -5,11 +5,31 @@
  */
 package Business.Travel;
 
+import Business.Customer.CustomerDirectory;
+
 /**
  *
  * @author 16104
  */
 //掌管CustomerDirectory
 public class TravelOffice {
+    private String officeName;
+    private CustomerDirectory customerDirectory;
+
+    public String getOfficeName() {
+        return officeName;
+    }
+
+    public void setOfficeName(String officeName) {
+        this.officeName = officeName;
+    }
+
+    public CustomerDirectory getCustomerDirectory() {
+        return customerDirectory;
+    }
+
+    public void setCustomerDirectory(CustomerDirectory customerDirectory) {
+        this.customerDirectory = customerDirectory;
+    }
     
 }

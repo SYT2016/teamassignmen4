@@ -19,9 +19,9 @@ public class AirplaneDirectory {
         airplanelist=new ArrayList<Airplane> ();
     
     }
-    public Airplane addAirplane(String airplaneID,String airplaneModel,boolean isFood,int airplaneage){
+    public Airplane addAirplane(String airplaneID,String airplaneModel,boolean isFood,int airplaneage,int numofseats){
         
-        Airplane airplane=new Airplane(airplaneID,airplaneModel,isFood,airplaneage);
+        Airplane airplane=new Airplane(airplaneID,airplaneModel,airplaneage,numofseats);
         airplanelist.add(airplane);
         return airplane;
     

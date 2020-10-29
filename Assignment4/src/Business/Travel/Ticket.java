@@ -5,10 +5,32 @@
  */
 package Business.Travel;
 
+import Business.Flight.Flight;
+import Util.Address;
+
 /**
  *
  * @author 16104
  */
 public class Ticket {
+    private Seat seat;
+    private Flight flight;
+
+    public Seat getSeat() {
+        return seat;
+    }
+
+    public void setSeat(Seat seat) {
+        this.seat = seat;
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
+    
     
 }
