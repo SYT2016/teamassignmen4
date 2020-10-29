@@ -6,6 +6,9 @@
 package UserInterface.ManagerAirliners;
 
 import Business.Airliners.Airliner;
+import Business.Airliners.AirlinerDirectory;
+import Business.Airliners.AirlinerProfile;
+import Business.Airliners.AirlinerProfileList;
 import Business.Airplane.Airplane;
 import Business.Flight.Flight;
 import Business.Flight.FlightSchedule;
@@ -357,6 +360,11 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
         airplane.setFlight(flight);
         airliner.addFlight(flight);
 
+        airliner.getFlightList().add(flight);
+        airliner.getAirplaneList().add(airplane);
+        AirlinerDirectory.addAirliner(airliner);
+        AirlinerProfile airlinerProfile = new AirlinerProfile(airliner,flight,airplane);
+        AirlinerProfileList.addAirlinerProfile(airlinerProfile);
         ManageAirlinersJPanel.show(this.cardSequenceJPanel, this.airliner);
     }//GEN-LAST:event_btnAddPlaneActionPerformed
 

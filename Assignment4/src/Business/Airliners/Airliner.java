@@ -10,6 +10,7 @@ import Util.Address;
 
 import java.util.ArrayList;
 import java.util.List;
+import Business.Airplane.Airplane;
 
 /**
  *
@@ -22,6 +23,15 @@ public class Airliner {
     private int airplaneNumber;
     private String password;
     private List<Flight> flightList = new ArrayList<>();
+    private List<Airplane>  airplaneList = new ArrayList<>();
+
+    public List<Airplane> getAirplaneList() {
+        return airplaneList;
+    }
+
+    public void setAirplaneList(List<Airplane> airplaneList) {
+        this.airplaneList = airplaneList;
+    }
 
     public void addFlight(Flight flight) {
         flightList.add(flight);
