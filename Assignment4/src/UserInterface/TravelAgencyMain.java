@@ -5,9 +5,11 @@
  */
 package UserInterface;
 
+import Business.Customer.CustomeProfileList;
 import Business.Customer.CustomerDirectory;
+import Business.Flight.FlightSchedule;
 import UserInterface.ManageCustomers.CreateNewCustomerJpanel;
-import UserInterface.ManagerAirliners.*;
+import UserInterface.ManageCustomers.ViewCusProfilesJPanel;
 import UserInterface.ManagerAirliners.CreateAirlinerJPanel;
 import UserInterface.ManagerAirliners.ManageAirlinersJPanel;
 
@@ -22,10 +24,14 @@ public class TravelAgencyMain extends javax.swing.JFrame {
 
     private CustomerDirectory customerDirectory;
     private JPanel cardSequence;
+    private CustomeProfileList cusPros;
+    private FlightSchedule flightSchedule;
     public TravelAgencyMain() {
         initComponents();
         this.customerDirectory=new CustomerDirectory();
         this.cardSequence=cardSequence;
+        this.flightSchedule=flightSchedule;
+        this.cusPros=cusPros;
     }
 
     /**
@@ -75,18 +81,22 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         });
 
         btnManageCus.setText("Manager Customers");
+        btnManageCus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageCusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnManageAirliner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAddAirliner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btnAddCus, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnManageCus, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnManageCus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAddCus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnManageAirliner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAddAirliner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -138,6 +148,13 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         CardLayout layout = (CardLayout) this.CardSequenceJPanel.getLayout();
         layout.next(this.CardSequenceJPanel);
     }//GEN-LAST:event_btnAddCusActionPerformed
+
+    private void btnManageCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCusActionPerformed
+        ViewCusProfilesJPanel jp=new ViewCusProfilesJPanel(cardSequence, cusPros, flightSchedule);
+        cardSequence.add("ViewCusProfilesJPanel",jp);
+        CardLayout l=(CardLayout)cardSequence.getLayout();
+        l.next(cardSequence);
+    }//GEN-LAST:event_btnManageCusActionPerformed
 
     /**
      * @param args the command line arguments

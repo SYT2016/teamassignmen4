@@ -10,6 +10,7 @@ import Util.Address;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 16104
@@ -32,6 +33,12 @@ public class FlightSchedule {
 
         return flight;
 
+    }
+    
+    public Flight addFlight(){
+        Flight flight=new Flight();
+        FlightList.add(flight);
+        return flight;
     }
 
     /**
@@ -76,6 +83,16 @@ public class FlightSchedule {
         }
         return airlinerflightlist;
 
+    }
+    
+    public ArrayList<Flight> getFlightListThroughDate(Date d){
+        ArrayList<Flight> l=new ArrayList<Flight>();
+        for(Flight f:FlightList){
+            if(f.getTakeOffTime().before(d)){
+                l.add(f);
+            }
+        }
+        return l;
     }
 
     public ArrayList<Flight> getFlightList() {

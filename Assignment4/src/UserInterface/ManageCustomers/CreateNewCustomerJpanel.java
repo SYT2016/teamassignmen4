@@ -114,8 +114,6 @@ public class CreateNewCustomerJpanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         cardSequence.remove(this);
-//        Component[] arr=cardSequence.getComponents();
-//        Component c=arr[arr.length-1];
         CardLayout layout=(CardLayout)cardSequence.getLayout();
         layout.previous(cardSequence);
     }//GEN-LAST:event_btnBackActionPerformed
