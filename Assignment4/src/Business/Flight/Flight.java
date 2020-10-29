@@ -5,56 +5,61 @@
  */
 package Business.Flight;
 
-import Util.Address;
 import Business.Airplane.Airplane;
 import Business.Travel.Seat;
+import Util.Address;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
- *
  * @author 16104
  */
 //一个航班的信息，包括飞机的详细信息，所属航空公司，航班出发时间和抵达时间，出发机场和抵达机场
 public class Flight {
-    private String flightCode;//航班编号，如：HN123456
+    private String flightNumber;//航班编号，如：HN123456
     private String airlinerName;
     private Airplane airplane;
-    private String takeoffTime;//飞机起飞时间
-    private String arriveTime;
-    private Date takeoffDate;
-    private Date arriveDate;
-    private Address takeoffPlace;//起飞的国家，城市，机场
-    private Address arrivePlace;//到达的国家，城市，机场
-    private ArrayList<Seat> seatlist;
-    
-    public Flight(){
-    
-    }
-    public Flight(String airlinerName,Airplane airplane,String takeoffTime,String arriveTime, Address takeoffPlace,Address arrivePlace){
-        this.airlinerName=airlinerName;
-        this.airplane=airplane;
-        this.takeoffTime=takeoffTime;
-        this.takeoffPlace=takeoffPlace;
-        this.arriveTime=arriveTime;
-        this.arrivePlace=arrivePlace;
-        //往seatlist里面加座椅
-        seatlist=new ArrayList<Seat>();
-        for(int i=0;i<this.airplane.getNumOfSeats();i++){
-            seatlist.add(new Seat());       
-        }  
+    private Date takeOffTime;
+    private Date landingTime;
+    /**
+     * 起飞的国家，城市，机场
+     */
+    private Address takeOffPlace;
+    /**
+     * 到达的国家，城市，机场
+     */
+    private Address landingPlace;
+    private List<Seat> seatList = new ArrayList<>();
+
+    public Flight() {
     }
 
-    public String getFlightCode() {
-        return flightCode;
+    public Flight(String flightNumber, String airlinerName, Airplane airplane, Date takeOffTime, Date landingTime, Address takeOffPlace, Address landingPlace) {
+        this.flightNumber = flightNumber;
+        this.airlinerName = airlinerName;
+        this.airplane = airplane;
+        this.takeOffTime = takeOffTime;
+        this.landingTime = landingTime;
+        this.takeOffPlace = takeOffPlace;
+        this.landingPlace = landingPlace;
+        for (int i = 0; i < this.airplane.getNumOfSeats(); i++) {
+            int row = i / 6;
+            String column = null;
+            if (i % 6 == 1 || i % 6 == 0) {
+                column = "window";
+            }
+            if (i % 6 == 2 || i % 6 == 5) {
+                column = "middle";
+            }
+            if (i % 6 == 3 || i % 6 == 4) {
+                column = "aisle";
+            }
+            seatList.add(new Seat(row, column));
+        }
     }
 
-    public void setFlightCode(String flightCode) {
-        this.flightCode = flightCode;
-    }
-    
-    
-    
     public String getAirlinerName() {
         return airlinerName;
     }
@@ -69,65 +74,67 @@ public class Flight {
 
     public void setAirplane(Airplane airplane) {
         this.airplane = airplane;
+        for (int i = 0; i < this.airplane.getNumOfSeats(); i++) {
+            int row = i / 6;
+            String column = null;
+            if (i % 6 == 1 || i % 6 == 0) {
+                column = "window";
+            }
+            if (i % 6 == 2 || i % 6 == 5) {
+                column = "middle";
+            }
+            if (i % 6 == 3 || i % 6 == 4) {
+                column = "aisle";
+            }
+            seatList.add(new Seat(row, column));
+        }
     }
 
-    public String getTakeoffTime() {
-        return takeoffTime;
+    public String getFlightNumber() {
+        return flightNumber;
     }
 
-    public void setTakeoffTime(String takeoffTime) {
-        this.takeoffTime = takeoffTime;
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
     }
 
-    public String getArriveTime() {
-        return arriveTime;
+    public Address getTakeOffPlace() {
+        return takeOffPlace;
     }
 
-    public void setArriveTime(String arriveTime) {
-        this.arriveTime = arriveTime;
+    public void setTakeOffPlace(Address takeOffPlace) {
+        this.takeOffPlace = takeOffPlace;
     }
 
-    public Address getTakeoffPlace() {
-        return takeoffPlace;
+    public Address getLandingPlace() {
+        return landingPlace;
     }
 
-    public void setTakeoffPlace(Address takeoffPlace) {
-        this.takeoffPlace = takeoffPlace;
+    public void setLandingPlace(Address landingPlace) {
+        this.landingPlace = landingPlace;
     }
 
-    public Address getArrivePlace() {
-        return arrivePlace;
+    public Date getTakeOffTime() {
+        return takeOffTime;
     }
 
-    public void setArrivePlace(Address arrivePlace) {
-        this.arrivePlace = arrivePlace;
+    public void setTakeOffTime(Date takeOffTime) {
+        this.takeOffTime = takeOffTime;
     }
 
-    public Date getTakeoffDate() {
-        return takeoffDate;
+    public Date getLandingTime() {
+        return landingTime;
     }
 
-    public void setTakeoffDate(Date takeoffDate) {
-        this.takeoffDate = takeoffDate;
+    public void setLandingTime(Date landingTime) {
+        this.landingTime = landingTime;
     }
 
-    public Date getArriveDate() {
-        return arriveDate;
+    public List<Seat> getSeatList() {
+        return seatList;
     }
 
-    public void setArriveDate(Date arriveDate) {
-        this.arriveDate = arriveDate;
+    public void setSeatList(List<Seat> seatList) {
+        this.seatList = seatList;
     }
-
-    public ArrayList<Seat> getSeatlist() {
-        return seatlist;
-    }
-
-    public void setSeatlist(ArrayList<Seat> seatlist) {
-        this.seatlist = seatlist;
-    }
-    
-    
-    
-    
 }

@@ -5,9 +5,12 @@
  */
 package Business.Airliners;
 
-import Business.Airplane.Airplane;
+import Business.Flight.Flight;
 import Util.Address;
+
 import java.util.ArrayList;
+import java.util.List;
+import Business.Airplane.Airplane;
 
 /**
  *
@@ -15,53 +18,70 @@ import java.util.ArrayList;
  */
 //一个航空公司的详细信息，例如公司名字，公司创建年份。公司所在地点,公司旗下飞机总数
 public class Airliner {
-    private String airlinerName;
-    private Address airlinerPlace;
-    private int airplanenumber;
-    private ArrayList<Airplane> airplaneList;
-    
-    public Airliner(){
-    
-    }
-    
-    public Airliner(String airlinerName,Address airlinerPlace,int airplanenumber,ArrayList<Airplane> airplaneList){
-        this.airlinerName=airlinerName;
-        this.airlinerPlace=airlinerPlace;
-        this.airplanenumber=airplanenumber;
-        this.airplaneList= airplaneList;
-    
-    }
+    private String name;
+    private Address address;
+    private int airplaneNumber;
+    private String password;
+    private List<Flight> flightList = new ArrayList<>();
+    private List<Airplane>  airplaneList = new ArrayList<>();
 
-    public String getAirlinerName() {
-        return airlinerName;
-    }
-
-    public void setAirlinerName(String airlinerName) {
-        this.airlinerName = airlinerName;
-    }
-
-    public Address getAirlinerPlace() {
-        return airlinerPlace;
-    }
-
-    public void setAirlinerPlace(Address airlinerPlace) {
-        this.airlinerPlace = airlinerPlace;
-    }
-
-    public int getAirplanenumber() {
-        return airplanenumber;
-    }
-
-    public void setAirplanenumber(int airplanenumber) {
-        this.airplanenumber = airplanenumber;
-    }
-
-    public ArrayList<Airplane> getAirplaneList() {
+    public List<Airplane> getAirplaneList() {
         return airplaneList;
     }
 
-    public void setAirplaneList(ArrayList<Airplane> airplaneList) {
+    public void setAirplaneList(List<Airplane> airplaneList) {
         this.airplaneList = airplaneList;
+    }
+
+    public void addFlight(Flight flight) {
+        flightList.add(flight);
+    }
+
+    public Airliner(String name, String country, String city, String password){
+        this.name = name;
+        Address address = new Address(country, city);
+        this.address = address;
+        this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public int getAirplaneNumber() {
+        return airplaneNumber;
+    }
+
+    public void setAirplaneNumber(int airplaneNumber) {
+        this.airplaneNumber = airplaneNumber;
+    }
+
+    public List<Flight> getFlightList() {
+        return flightList;
+    }
+
+    public void setFlightList(List<Flight> flightList) {
+        this.flightList = flightList;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
     
