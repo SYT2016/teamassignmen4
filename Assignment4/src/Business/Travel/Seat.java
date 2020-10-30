@@ -24,10 +24,10 @@ public class Seat {
         this.isOccupy = false;
     }
 
-    public Seat(int row, String column) {
+    public Seat(int row, String column, String seatNo) {
         this.row = row;
         this.column = column;
-        this.isOccupy = true;
+        this.seatNo = seatNo;
     }
     
     public Seat(int row, String column, String seatNo) {
