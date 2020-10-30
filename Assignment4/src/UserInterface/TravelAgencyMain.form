@@ -66,15 +66,14 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
 
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="63" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="btnManageCus" max="32767" attributes="0"/>
-                              <Component id="btnAddCus" max="32767" attributes="0"/>
-                              <Component id="btnManageAirliner" max="32767" attributes="0"/>
-                              <Component id="btnAdd" max="32767" attributes="0"/>
+                              <Component id="btnAirlinerIssue" max="32767" attributes="0"/>
+                              <Component id="btnCusIssues" pref="159" max="32767" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
 
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="btnLogInAirliner" max="32767" attributes="0"/>
@@ -85,54 +84,32 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
 
-                          <Component id="btnAdd" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="btnLogInAirliner" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="400" max="32767" attributes="0"/>
-                          <Component id="btnManageAirliner" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                          <Component id="btnAddCus" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                          <Component id="btnManageCus" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="266" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="231" max="-2" attributes="0"/>
+                          <Component id="btnAirlinerIssue" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                          <Component id="btnCusIssues" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="618" max="32767" attributes="0"/>
 
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="btnAddAirliner">
+                <Component class="javax.swing.JButton" name="btnCusIssues">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Create Airliner"/>
+                    <Property name="text" type="java.lang.String" value="Customer Issues"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddAirlinerActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCusIssuesActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnManageAirliner">
+                <Component class="javax.swing.JButton" name="btnAirlinerIssue">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Manager Airliners"/>
+                    <Property name="text" type="java.lang.String" value="Airliner Issues"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageAirlinerActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="btnAddCus">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Create Customer"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddCusActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="btnManageCus">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Manager Customers"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageCusActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAirlinerIssueActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnLogInAirliner">

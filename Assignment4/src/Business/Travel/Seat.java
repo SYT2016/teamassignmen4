@@ -29,6 +29,13 @@ public class Seat {
         this.column = column;
         this.seatNo = seatNo;
     }
+    
+    public Seat(int row, String column, String seatNo) {
+        this.row = row;
+        this.column = column;
+        this.seatNo = seatNo;
+        //this.isOccupy = true;
+    }
 
     public int getRow() {
         return row;

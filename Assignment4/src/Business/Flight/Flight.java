@@ -46,7 +46,9 @@ public class Flight {
         this.takeOffPlace = takeOffPlace;
         this.landingPlace = landingPlace;
         initSeats(this.airplane.getNumOfSeats());
-        seatList.forEach(System.out::println);
+
+        //seatList.forEach(System.out::println);
+
     }
 
     private void initSeats(int seatNumber) {
@@ -57,6 +59,7 @@ public class Flight {
             if (i % 6 == 0) {
                 column = "window";
                 no = "A";
+
             }
             if (i % 6 == 5) {
                 column = "window";
@@ -74,6 +77,7 @@ public class Flight {
                 column = "aisle";
                 no = "C";
             }
+
             if ( i % 6 == 3) {
                 column = "aisle";
                 no = "D";

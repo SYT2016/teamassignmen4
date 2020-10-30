@@ -33,7 +33,7 @@ public class BookFlightJPanel extends javax.swing.JPanel {
         this.cusPro=cusPro;
         this.assignList=assignList;
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh-MM");
-        txtAirlinerName.setText(flight.getAirlinerName());
+        txtAirlinerName.setText(flight.getAirliner().getName());
         txtDepartTime.setText(sdf.format(flight.getTakeOffTime()));
         txtDepartAirport.setText(flight.getTakeOffPlace().toString());
         txtArrivalTime.setText(sdf.format(flight.getLandingTime()));
@@ -150,7 +150,7 @@ public class BookFlightJPanel extends javax.swing.JPanel {
         Ticket ticket=new Ticket(seat,flight);
         AssignCusToFlight cusToFli=new AssignCusToFlight(cusPro,flight,ticket);
         assignList.addIn(cusToFli);
-        JOptionPane.showMessageDialog(null, "Book Successfully");
+        JOptionPane.showMessageDialog(null, "Book A Flight Successfully");
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 

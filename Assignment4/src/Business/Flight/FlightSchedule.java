@@ -86,10 +86,22 @@ public class FlightSchedule {
 
     }
     
-    public ArrayList<Flight> getFlightListThroughDate(Date d){
+    //根据日期找航班
+    public ArrayList<Flight> getFlightListThroughDate(Date d,ArrayList<Flight> arr){
+        ArrayList<Flight> l=new ArrayList<Flight>();
+        for(Flight f:arr){
+            if(f.getTakeOffTime().before(d)){
+                l.add(f);
+            }
+        }
+        return l;
+    }
+    
+    //根据地点找航班
+    public ArrayList<Flight> getFlightThroughAddress(Address from,Address to){
         ArrayList<Flight> l=new ArrayList<Flight>();
         for(Flight f:FlightList){
-            if(f.getTakeOffTime().before(d)){
+            if(f.getTakeOffPlace().toString().equals(from.toString()) && f.getLandingPlace().toString().equals(to.toString())){
                 l.add(f);
             }
         }

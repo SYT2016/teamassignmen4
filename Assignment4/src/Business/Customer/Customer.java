@@ -19,7 +19,7 @@ public class Customer {
     private int age;
     private String gender;
     private String phone;
-    private ArrayList<Ticket> customerTicketList;//该用户被分配的所有tickets
+    //private ArrayList<Ticket> customerTicketList;//该用户被分配的所有tickets
     
     public Customer(){
     }
@@ -29,7 +29,7 @@ public class Customer {
         this.gender=gender;
         this.name=name;
         this.phone=phone;
-        customerTicketList=new ArrayList<Ticket>();
+        //customerTicketList=new ArrayList<Ticket>();
     }
 
     public String getCustomerID() {
@@ -72,13 +72,17 @@ public class Customer {
         this.phone = phone;
     }
 
-    public ArrayList<Ticket> getCustomerTicketList() {
-        return customerTicketList;
+    @Override 
+    public String toString(){
+        return this.name;
     }
-
-    public void setCustomerTicketList(ArrayList<Ticket> customerTicketList) {
-        this.customerTicketList = customerTicketList;
-    }
+//    public ArrayList<Ticket> getCustomerTicketList() {
+//        return customerTicketList;
+//    }
+//
+//    public void setCustomerTicketList(ArrayList<Ticket> customerTicketList) {
+//        this.customerTicketList = customerTicketList;
+//    }
     
     
     
