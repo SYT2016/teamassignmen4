@@ -47,7 +47,10 @@ public class Flight {
         this.takeOffPlace = takeOffPlace;
         this.landingPlace = landingPlace;
         initSeats(this.airplane.getNumOfSeats());
-        //seatList.forEach(System.out::println);
+    }
+
+    public void remove() {
+        this.airliner.removeFlight(this);
     }
 
     private void initSeats(int seatNumber) {
@@ -91,8 +94,6 @@ public class Flight {
         }
         return num;
     }
-    
-    
     
     //预订航班后座位信息的变化
     public void changeSeatCondition(int row,String column){

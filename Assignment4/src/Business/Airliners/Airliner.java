@@ -23,21 +23,24 @@ public class Airliner {
     private Address address;
     private int airplaneNumber;
     private String password;
-    private Map<String, Flight> flightList = new HashMap<>();
-
-    public void addFlight(Flight flight) {
-        flightList.put(flight.getFlightNumber(), flight);
-    }
-
-    public void replaceFlight(Flight flight1, Flight flight2) {
-        this.flightList.put(flight1.getFlightNumber(), flight2);
-    }
+    private final Map<String, Flight> flightMap = new HashMap<>();
 
     public Airliner(String name, String country, String city, String password){
         this.name = name;
-        Address address = new Address(country, city);
-        this.address = address;
+        this.address = new Address(country, city);
         this.password = password;
+    }
+
+    public void addFlight(Flight flight) {
+        flightMap.put(flight.getFlightNumber(), flight);
+    }
+
+    public void replaceFlight(Flight flight1, Flight flight2) {
+        this.flightMap.put(flight1.getFlightNumber(), flight2);
+    }
+
+    public void removeFlight(Flight flight) {
+        this.flightMap.remove(flight.getFlightNumber());
     }
 
     public String getName() {
@@ -64,8 +67,8 @@ public class Airliner {
         this.airplaneNumber = airplaneNumber;
     }
 
-    public List<Flight> getFlightList() {
-        return new ArrayList<>(flightList.values());
+    public List<Flight> getFlightMap() {
+        return new ArrayList<>(flightMap.values());
     }
 
     public String getPassword() {
@@ -75,7 +78,4 @@ public class Airliner {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
-    
 }

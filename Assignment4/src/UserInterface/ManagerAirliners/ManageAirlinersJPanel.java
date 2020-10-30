@@ -11,6 +11,8 @@ import Business.Flight.Flight;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -88,6 +90,7 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblFlightDetails.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblFlightDetails);
         if (tblFlightDetails.getColumnModel().getColumnCount() > 0) {
             tblFlightDetails.getColumnModel().getColumn(0).setResizable(false);
@@ -111,29 +114,31 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(btnBack)
+                        .addGap(179, 179, 179)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(107, 107, 107)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnAddFlight)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnViewFlightDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(230, 230, 230)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(btnBack)))
-                .addContainerGap(213, Short.MAX_VALUE))
+                                .addComponent(btnViewFlightDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(btnBack)
-                .addGap(4, 4, 4)
-                .addComponent(jLabel1)
-                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(btnBack))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel1)))
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnViewFlightDetails)
                     .addComponent(btnAddFlight))
@@ -154,13 +159,9 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnViewFlightDetailsActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-//        cardSequenceJPanel.remove(this);
-//        Component[] componentArray = cardSequenceJPanel.getComponents();
-//        Component component = componentArray[componentArray.length - 1];
-//        ManageAirlinersJPanel manageProductCatalogJPanel = (ManageAirlinersJPanel) component;
-//        manageProductCatalogJPanel.refreshTable();
-//        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
-//        layout.previous(cardSequenceJPanel);
+        cardSequenceJPanel.remove(this);
+        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+        layout.previous(cardSequenceJPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
     public void refreshTable(Airliner airliner) {
@@ -170,13 +171,15 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
         for(int i=rowCount-1;i>=0;i--) {
             model.removeRow(i);
         }
-        for(Flight flight : airliner.getFlightList()) {
+
+        DateFormat format = new SimpleDateFormat("YY/MM/dd HH:mm");
+        for(Flight flight : airliner.getFlightMap()) {
             Object[] row = new Object[6];
             row[0] = flight;
             row[1] = flight.getTakeOffPlace().toString();
             row[2] = flight.getLandingPlace().toString();
-            row[3] = flight.getTakeOffTime();
-            row[4] = flight.getLandingTime();
+            row[3] = format.format(flight.getTakeOffTime());
+            row[4] = format.format(flight.getLandingTime());
             model.addRow(row);
         }
     }

@@ -15,6 +15,7 @@ import Util.Address;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -119,6 +120,12 @@ public class AddAirplaneJPanel extends JPanel {
         });
 
         btnBack.setText("<<Back");
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBackMouseClicked(evt);
+            }
+        });
+
 
         jLabel2.setText("Take Off Country:");
 
@@ -383,6 +390,10 @@ public class AddAirplaneJPanel extends JPanel {
             return;
         }
         landingTime.set(Calendar.MINUTE, landingMin);
+        if (landingTime.compareTo(takeOffTime) <= 0) {
+            JOptionPane.showMessageDialog(this, "Landing time must be later than take off time!","Error", JOptionPane.ERROR_MESSAGE) ;
+            return;
+        }
         String flightNumber = getFlightNumber();
         if (flightNumber == null) {
             return;
@@ -647,6 +658,16 @@ public class AddAirplaneJPanel extends JPanel {
             return -1;
         }
     }
+
+    private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
+        cardSequenceJPanel.remove(this);
+        Component[] componentArray = cardSequenceJPanel.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        ManageAirlinersJPanel manageProductCatalogJPanel = (ManageAirlinersJPanel) component;
+        manageProductCatalogJPanel.refreshTable(airliner);
+        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+        layout.previous(cardSequenceJPanel);
+    }//GEN-LAST:event_btnBackMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddPlane;
