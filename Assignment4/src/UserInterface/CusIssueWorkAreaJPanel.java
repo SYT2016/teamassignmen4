@@ -28,6 +28,7 @@ public class CusIssueWorkAreaJPanel extends javax.swing.JPanel {
     private AssignCusToFlightList assignList;
     public CusIssueWorkAreaJPanel(JPanel cardSequence,CustomerDirectory customerDirectory,CustomeProfileList cusPros,FlightSchedule flightSchedule,AssignCusToFlightList assignList) {
         initComponents();
+        this.cardSequence=cardSequence;
         this.customerDirectory=new CustomerDirectory();
         this.flightSchedule=new FlightSchedule();
         this.cusPros=new CustomeProfileList(this.customerDirectory);
@@ -75,24 +76,24 @@ public class CusIssueWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCusActionPerformed
-        CreateNewCustomerJpanel createCustomerJPanel = new CreateNewCustomerJpanel(this.cardSequence,customerDirectory);
-        this.cardSequence.add("CreateNewCustomerJPanel", createCustomerJPanel);
-        CardLayout layout = (CardLayout) this.cardSequence.getLayout();
-        layout.next(this.cardSequence);
+        CreateNewCustomerJpanel createCustomerJPanel = new CreateNewCustomerJpanel(cardSequence,customerDirectory);
+        cardSequence.add("CreateNewCustomerJPanel", createCustomerJPanel);
+        CardLayout layout = (CardLayout) cardSequence.getLayout();
+        layout.next(cardSequence);
     }//GEN-LAST:event_btnAddCusActionPerformed
 
     private void btnManageCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCusActionPerformed
         ViewCusProfilesJPanel jp=new ViewCusProfilesJPanel(cardSequence, cusPros, flightSchedule,assignList);
-        this.cardSequence.add("ViewCusProfilesJPanel",jp);
-        CardLayout l=(CardLayout)this.cardSequence.getLayout();
-        l.next(this.cardSequence);
+        cardSequence.add("ViewCusProfilesJPanel",jp);
+        CardLayout l=(CardLayout)cardSequence.getLayout();
+        l.next(cardSequence);
     }//GEN-LAST:event_btnManageCusActionPerformed
 
     private void btnCreateCusProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateCusProActionPerformed
         CreateCusProJPanel jp=new CreateCusProJPanel(cardSequence,customerDirectory, cusPros);
-        this.cardSequence.add("CreateCusProJPanel",jp);
-        CardLayout l=(CardLayout)this.cardSequence.getLayout();
-        l.next(this.cardSequence);
+        cardSequence.add("CreateCusProJPanel",jp);
+        CardLayout l=(CardLayout)cardSequence.getLayout();
+        l.next(cardSequence);
     }//GEN-LAST:event_btnCreateCusProActionPerformed
 
 

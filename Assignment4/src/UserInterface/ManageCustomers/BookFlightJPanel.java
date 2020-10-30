@@ -12,6 +12,7 @@ import Business.Flight.Flight;
 import Business.Travel.Seat;
 import Business.Travel.Ticket;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -126,7 +127,7 @@ public class BookFlightJPanel extends javax.swing.JPanel {
         comboRow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25" }));
         add(comboRow, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, -1, -1));
 
-        comboColumn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Window1", "Middle1", "Aisle1", "Window2", "Middle2", "Aisle2" }));
+        comboColumn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A(Window)", "B(Middle)", "C(Aisle)", "D(Aisle)", "E(Middle)", "F(Window)", " " }));
         add(comboColumn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, -1, -1));
 
         btnSubmit.setText("Submit");
@@ -140,16 +141,24 @@ public class BookFlightJPanel extends javax.swing.JPanel {
 
     private void BtnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBackActionPerformed
         cardSequence.remove(this);
+        Component[] components=cardSequence.getComponents();
+        Component c=components[components.length-1];
+        SearchFlightsJPanel jp=(SearchFlightsJPanel)c;
+        //jp.populate(flightSchedule.getFlightList());
         CardLayout layout=(CardLayout)cardSequence.getLayout();
         layout.previous(cardSequence);
     }//GEN-LAST:event_BtnBackActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-
-        Seat seat=new Seat((int)comboRow.getSelectedItem(),comboColumn.getSelectedItem().toString());
+       
+        int row=(int)comboRow.getSelectedItem();
+        String column=comboColumn.getSelectedItem().toString().substring(0,1);
+        flight.changeSeatCondition(row, column);
+        Seat seat=new Seat(row,column);
         Ticket ticket=new Ticket(seat,flight);
         AssignCusToFlight cusToFli=new AssignCusToFlight(cusPro,flight,ticket);
         assignList.addIn(cusToFli);
+        cusPro.setIsBookFlight(true);      
         JOptionPane.showMessageDialog(null, "Book A Flight Successfully");
     }//GEN-LAST:event_btnSubmitActionPerformed
 

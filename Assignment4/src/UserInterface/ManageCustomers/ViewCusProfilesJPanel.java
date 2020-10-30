@@ -85,7 +85,7 @@ public class ViewCusProfilesJPanel extends javax.swing.JPanel {
         jLabel1.setText("Customers' Travel Info ");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, -1, -1));
 
-        btnSearchFlights.setText("Serach Flights");
+        btnSearchFlights.setText("Search Flights");
         btnSearchFlights.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchFlightsActionPerformed(evt);

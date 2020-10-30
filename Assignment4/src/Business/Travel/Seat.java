@@ -13,7 +13,7 @@ public class Seat {
 
     private int row;
 
-    /** window,middle,aisle */
+    /** WINDOW,MIDDLE,AISLE */
     private String column;
 
     private boolean isOccupy;
@@ -24,10 +24,10 @@ public class Seat {
         this.isOccupy = false;
     }
 
-    public Seat(int row, String column, String seatNo) {
+    public Seat(int row, String column) {
         this.row = row;
         this.column = column;
-        this.seatNo = seatNo;
+        this.isOccupy = true;
     }
     
     public Seat(int row, String column, String seatNo) {

@@ -13,6 +13,7 @@ import Util.Address;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  * @author 16104
@@ -46,9 +47,7 @@ public class Flight {
         this.takeOffPlace = takeOffPlace;
         this.landingPlace = landingPlace;
         initSeats(this.airplane.getNumOfSeats());
-
         //seatList.forEach(System.out::println);
-
     }
 
     private void initSeats(int seatNumber) {
@@ -57,29 +56,27 @@ public class Flight {
             String column = null;
             String no = null;
             if (i % 6 == 0) {
-                column = "window";
+                column = "WINDOW";
                 no = "A";
-
             }
             if (i % 6 == 5) {
-                column = "window";
+                column = "WINDOW";
                 no = "F";
             }
             if (i % 6 == 1) {
-                column = "middle";
+                column = "MIDDLE";
                 no = "B";
             }
             if (i % 6 == 4) {
-                column = "middle";
+                column = "MIDDLE";
                 no = "E";
             }
             if (i % 6 == 2) {
-                column = "aisle";
+                column = "AISLE";
                 no = "C";
             }
-
             if ( i % 6 == 3) {
-                column = "aisle";
+                column = "AISLE";
                 no = "D";
             }
             seatList.add(new Seat(row + 1, column, (row + 1) + no));
@@ -93,6 +90,20 @@ public class Flight {
             if(!s.isOccupy()) num++;
         }
         return num;
+    }
+    
+    
+    
+    //预订航班后座位信息的变化
+    public void changeSeatCondition(int row,String column){
+        for(Seat s:seatList){
+            if(s.getRow()==row && s.getColumn().equals(column)){
+                if(s.isOccupy()){
+                    JOptionPane.showMessageDialog(null, "The seat has been occupied. Please select another one");
+                    break;
+                }else s.setOccupy(true);
+            }          
+        }
     }
     
     @Override
@@ -119,11 +130,6 @@ public class Flight {
 
     public String getFlightNumber() {
         return flightNumber;
-    }
-
-    @Override
-    public String toString() {
-        return getFlightNumber();
     }
 
     public void setFlightNumber(String flightNumber) {

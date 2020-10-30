@@ -12,13 +12,11 @@ import Business.Airliners.AirlinerProfile;
 import Business.Airliners.AirlinerProfileList;
 import Business.Airplane.Airplane;
 import Business.Flight.Flight;
-
 import Util.Address;
 import Business.Customer.AssignCusToFlightList;
 import Business.Customer.CustomeProfileList;
 import Business.Customer.CustomerDirectory;
 import Business.Flight.FlightSchedule;
-
 
 
 import javax.swing.*;
@@ -56,11 +54,8 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         CardSequenceJPanel = new javax.swing.JPanel();
         jPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-
         btnCusIssues = new javax.swing.JButton();
         btnAirlinerIssue = new javax.swing.JButton();
-
-
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,13 +78,6 @@ public class TravelAgencyMain extends javax.swing.JFrame {
             }
         });
 
-        btnLogInAirliner.setText("Log in Airliner");
-        btnLogInAirliner.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogInAirlinerActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -97,22 +85,18 @@ public class TravelAgencyMain extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(63, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-
                     .addComponent(btnAirlinerIssue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCusIssues, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
                 .addGap(50, 50, 50))
-
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-
                 .addGap(231, 231, 231)
                 .addComponent(btnAirlinerIssue)
                 .addGap(118, 118, 118)
                 .addComponent(btnCusIssues)
-                .addContainerGap(618, Short.MAX_VALUE))
-
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         jPanel.add(jPanel1, "card2");
@@ -123,7 +107,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 971, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,11 +119,9 @@ public class TravelAgencyMain extends javax.swing.JFrame {
 
 
 
-
     private void btnCusIssuesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCusIssuesActionPerformed
         CusIssueWorkAreaJPanel jp = new CusIssueWorkAreaJPanel(this.CardSequenceJPanel, customerDirectory, cusPros, flightSchedule, assignList);
         this.CardSequenceJPanel.add("CusIssueWorkAreaJPanel", jp);
-
         CardLayout layout = (CardLayout) this.CardSequenceJPanel.getLayout();
         layout.next(this.CardSequenceJPanel);
     }//GEN-LAST:event_btnCusIssuesActionPerformed
@@ -150,7 +132,6 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         CardLayout layout = (CardLayout) this.CardSequenceJPanel.getLayout();
         layout.next(this.CardSequenceJPanel);
     }//GEN-LAST:event_btnAirlinerIssueActionPerformed
-
 
 
     /**
@@ -208,14 +189,9 @@ public class TravelAgencyMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-
-    private javax.swing.JPanel cardSequenceJPanel;
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnLogInAirliner;
     private javax.swing.JPanel CardSequenceJPanel;
     private javax.swing.JButton btnAirlinerIssue;
     private javax.swing.JButton btnCusIssues;
-
     private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
