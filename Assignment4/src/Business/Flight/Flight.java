@@ -81,6 +81,20 @@ public class Flight {
             seatList.add(new Seat(row + 1, column, (row + 1) + no));
         }
     }
+    
+    //该航班剩余可用座位
+    public int getAvailSeats(){
+        int num=0;
+        for(Seat s:seatList){
+            if(!s.isOccupy()) num++;
+        }
+        return num;
+    }
+    
+    @Override
+    public String toString(){
+        return this.flightNumber;
+    }
 
     public Airliner getAirliner() {
         return airliner;
