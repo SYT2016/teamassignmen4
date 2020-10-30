@@ -5,6 +5,7 @@
  */
 package Business.Flight;
 
+import Business.Airliners.Airliner;
 import Business.Airplane.Airplane;
 import Business.Travel.Seat;
 import Util.Address;
@@ -19,7 +20,7 @@ import java.util.List;
 //一个航班的信息，包括飞机的详细信息，所属航空公司，航班出发时间和抵达时间，出发机场和抵达机场
 public class Flight {
     private String flightNumber;//航班编号，如：HN123456
-    private String airlinerName;
+    private Airliner airliner;
     private Airplane airplane;
     private Date takeOffTime;
     private Date landingTime;
@@ -36,27 +37,48 @@ public class Flight {
     public Flight() {
     }
 
-    public Flight(String flightNumber, String airlinerName, Airplane airplane, Date takeOffTime, Date landingTime, Address takeOffPlace, Address landingPlace) {
+    public Flight(String flightNumber, Airliner airliner, Airplane airplane, Date takeOffTime, Date landingTime, Address takeOffPlace, Address landingPlace) {
         this.flightNumber = flightNumber;
-        this.airlinerName = airlinerName;
+        this.airliner = airliner;
         this.airplane = airplane;
         this.takeOffTime = takeOffTime;
         this.landingTime = landingTime;
         this.takeOffPlace = takeOffPlace;
         this.landingPlace = landingPlace;
-        for (int i = 0; i < this.airplane.getNumOfSeats(); i++) {
+        initSeats(this.airplane.getNumOfSeats());
+        seatList.forEach(System.out::println);
+    }
+
+    private void initSeats(int seatNumber) {
+        for (int i = 0; i < seatNumber; i++) {
             int row = i / 6;
             String column = null;
-            if (i % 6 == 1 || i % 6 == 0) {
+            String no = null;
+            if (i % 6 == 0) {
                 column = "window";
+                no = "A";
             }
-            if (i % 6 == 2 || i % 6 == 5) {
+            if (i % 6 == 5) {
+                column = "window";
+                no = "F";
+            }
+            if (i % 6 == 1) {
                 column = "middle";
+                no = "B";
             }
-            if (i % 6 == 3 || i % 6 == 4) {
+            if (i % 6 == 4) {
+                column = "middle";
+                no = "E";
+            }
+            if (i % 6 == 2) {
                 column = "aisle";
+                no = "C";
             }
-            seatList.add(new Seat(row, column));
+            if ( i % 6 == 3) {
+                column = "aisle";
+                no = "D";
+            }
+            seatList.add(new Seat(row + 1, column, (row + 1) + no));
         }
     }
     
@@ -74,12 +96,12 @@ public class Flight {
         return this.flightNumber;
     }
 
-    public String getAirlinerName() {
-        return airlinerName;
+    public Airliner getAirliner() {
+        return airliner;
     }
 
-    public void setAirlinerName(String airlinerName) {
-        this.airlinerName = airlinerName;
+    public void setAirliner(Airliner airliner) {
+        this.airliner = airliner;
     }
 
     public Airplane getAirplane() {
@@ -88,24 +110,16 @@ public class Flight {
 
     public void setAirplane(Airplane airplane) {
         this.airplane = airplane;
-        for (int i = 0; i < this.airplane.getNumOfSeats(); i++) {
-            int row = i / 6;
-            String column = null;
-            if (i % 6 == 1 || i % 6 == 0) {
-                column = "window";
-            }
-            if (i % 6 == 2 || i % 6 == 5) {
-                column = "middle";
-            }
-            if (i % 6 == 3 || i % 6 == 4) {
-                column = "aisle";
-            }
-            seatList.add(new Seat(row, column));
-        }
+        initSeats(airplane.getNumOfSeats());
     }
 
     public String getFlightNumber() {
         return flightNumber;
+    }
+
+    @Override
+    public String toString() {
+        return getFlightNumber();
     }
 
     public void setFlightNumber(String flightNumber) {

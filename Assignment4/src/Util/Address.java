@@ -26,8 +26,6 @@ public class Address {
     public Address(String Country, String City) {//公司地点
         this.country = Country;
         this.city = City;
-
-
     }
 
     public String getCountry() {

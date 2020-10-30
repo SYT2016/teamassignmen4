@@ -22,7 +22,7 @@ public class AirlinerDirectory {
         AIRLINER_LIST.add(airliner);
     }
 
-    public List<Airliner> getAirlinerList() {
+    public static List<Airliner> getAirlinerList() {
         return AIRLINER_LIST;
     }
 }

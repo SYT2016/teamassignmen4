@@ -11,20 +11,18 @@ import Business.Airliners.AirlinerProfile;
 import Business.Airliners.AirlinerProfileList;
 import Business.Airplane.Airplane;
 import Business.Flight.Flight;
-import Business.Flight.FlightSchedule;
-import UserInterface.TravelAgencyMain;
 import Util.Address;
-import com.eltima.components.ui.DatePicker;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
-import java.awt.*;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
  *
  * @author wangcong
  */
-public class AddAirplaneJPanel extends javax.swing.JPanel {
+public class AddAirplaneJPanel extends JPanel {
 
     private final JPanel cardSequenceJPanel;
 
@@ -72,14 +70,14 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
         datePickerTakeOff = new com.eltima.components.ui.DatePicker();
         txtFlightNumber = new javax.swing.JTextField();
         txtTakeOffCountry = new javax.swing.JTextField();
-        takeOffHour = new javax.swing.JTextField();
+        txtTakeOffHour = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        takeOffMin = new javax.swing.JTextField();
+        txtTakeOffMin = new javax.swing.JTextField();
         lblLandingTime = new javax.swing.JLabel();
         datePickerLanding = new com.eltima.components.ui.DatePicker();
-        landingHour = new javax.swing.JTextField();
+        txtLandingHour = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
-        landingMin = new javax.swing.JTextField();
+        txtLandingMin = new javax.swing.JTextField();
         txtTakeOffCity = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtAirliner = new javax.swing.JTextField();
@@ -114,9 +112,9 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
         comboBoxAirplaneModel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S", "M", "L" }));
 
         btnAddPlane.setText("Add Plane");
-        btnAddPlane.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddPlaneActionPerformed(evt);
+        btnAddPlane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddPlaneMouseClicked(evt);
             }
         });
 
@@ -130,29 +128,44 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
 
         jLabel5.setText("Take off time:");
 
+        datePickerTakeOff.setPreferredSize(new java.awt.Dimension(160, 30));
+
         txtFlightNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFlightNumberActionPerformed(evt);
             }
         });
 
-        takeOffHour.addActionListener(new java.awt.event.ActionListener() {
+        txtTakeOffHour.setPreferredSize(new java.awt.Dimension(30, 30));
+        txtTakeOffHour.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                takeOffHourActionPerformed(evt);
+                txtTakeOffHourActionPerformed(evt);
             }
         });
 
         jLabel6.setText(":");
 
+        txtTakeOffMin.setPreferredSize(new java.awt.Dimension(30, 30));
+
         lblLandingTime.setText("Landing Time:");
 
-        landingHour.addActionListener(new java.awt.event.ActionListener() {
+        datePickerLanding.setPreferredSize(new java.awt.Dimension(160, 30));
+
+        txtLandingHour.setPreferredSize(new java.awt.Dimension(30, 30));
+        txtLandingHour.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                landingHourActionPerformed(evt);
+                txtLandingHourActionPerformed(evt);
             }
         });
 
         jLabel26.setText(":");
+
+        txtLandingMin.setPreferredSize(new java.awt.Dimension(30, 30));
+        txtLandingMin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLandingMinActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Airliner:");
 
@@ -168,72 +181,79 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(13, 13, 13)
+                .addComponent(btnBack)
+                .addGap(217, 217, 217)
+                .addComponent(jLabel1)
+                .addContainerGap(335, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAirplaneSeats)
-                            .addComponent(lblAirplaneAge)
-                            .addComponent(lblAirplaneModel)
-                            .addComponent(lblAirplaneId)
-                            .addComponent(jLabel5)
-                            .addComponent(lblLandingTime))
-                        .addGap(49, 49, 49)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAddPlane))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblAirplaneModel)
+                                    .addComponent(lblAirplaneId)))
+                            .addComponent(lblAirplaneSeats)
+                            .addComponent(lblAirplaneAge)
+                            .addComponent(jLabel5)
+                            .addComponent(lblLandingTime))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtAirPlaneId)
+                                .addComponent(comboBoxAirplaneModel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtAirPlaneAge, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtAirPlaneSeats, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                                    .addComponent(txtAirPlaneId)
-                                    .addComponent(comboBoxAirplaneModel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAirPlaneAge))
-                                .addGap(79, 79, 79)
+                                    .addComponent(txtAirPlaneSeats, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(datePickerTakeOff, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(datePickerLanding, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(txtTakeOffHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(txtLandingHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtTakeOffMin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtLandingMin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtFlightNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                                    .addComponent(txtFlightNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                                     .addComponent(txtTakeOffCity, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txtTakeOffCountry, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(datePickerLanding, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(landingHour, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(datePickerTakeOff, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(takeOffHour, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel6)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(landingMin, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                                    .addComponent(takeOffMin))
-                                .addGap(48, 48, 48)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
                                     .addComponent(jLabel9)
+                                    .addComponent(jLabel8)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(22, 22, 22)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtAirliner)
                                     .addComponent(txtLandingCity)
-                                    .addComponent(txtLandingCountry))))
-                        .addGap(48, 48, 48))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(btnBack)
-                        .addGap(217, 217, 217)
-                        .addComponent(jLabel1)))
-                .addGap(33, 33, 33))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAddPlane)
+                                    .addComponent(txtLandingCountry)
+                                    .addComponent(txtAirliner))))))
                 .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
@@ -248,75 +268,62 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addGap(26, 26, 26)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAirplaneId)
-                    .addComponent(txtAirPlaneId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtFlightNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAirplaneModel)
-                    .addComponent(comboBoxAirplaneModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtTakeOffCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAirplaneAge)
-                    .addComponent(txtAirPlaneAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtTakeOffCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblAirplaneId)
+                                .addGap(122, 122, 122)
+                                .addComponent(lblAirplaneSeats)
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(datePickerTakeOff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5))
+                                .addGap(7, 7, 7)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(datePickerLanding, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblLandingTime)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(134, 134, 134)
+                                .addComponent(txtAirPlaneSeats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(164, 164, 164)
+                        .addComponent(btnAddPlane))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtFlightNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAirPlaneId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtTakeOffCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboBoxAirplaneModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAirplaneModel))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtTakeOffCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAirPlaneAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAirplaneAge))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(txtLandingCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(txtLandingCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
+                            .addComponent(txtLandingCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTakeOffMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTakeOffHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblAirplaneSeats)
-                            .addComponent(txtAirPlaneSeats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(datePickerTakeOff, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(takeOffHour, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel5))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(takeOffMin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtAirliner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(lblLandingTime)))
-                        .addGap(89, 89, 89)
-                        .addComponent(btnAddPlane))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(landingMin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel26)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(datePickerLanding, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                                .addComponent(landingHour)))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                            .addComponent(txtAirliner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(txtLandingMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLandingHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel26))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -324,49 +331,322 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFlightNumberActionPerformed
 
-    private void takeOffHourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_takeOffHourActionPerformed
+    private void txtTakeOffHourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTakeOffHourActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_takeOffHourActionPerformed
+    }//GEN-LAST:event_txtTakeOffHourActionPerformed
 
-    private void landingHourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_landingHourActionPerformed
+    private void txtLandingHourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLandingHourActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_landingHourActionPerformed
+    }//GEN-LAST:event_txtLandingHourActionPerformed
 
-    private void btnAddPlaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPlaneActionPerformed
-        String pId = txtAirPlaneId.getText();
-        String pModel = String.valueOf(comboBoxAirplaneModel.getSelectedItem());
-        int pAge = Integer.parseInt(txtAirPlaneAge.getText());
-        int pSeats = Integer.parseInt(txtAirPlaneSeats.getText());
-        Date takeOffTime = (Date) datePickerTakeOff.getValue();
-        int toHour = Integer.parseInt(String.valueOf(takeOffHour.getText()));
-        int toMin = Integer.parseInt(String.valueOf(takeOffMin.getText()));
-        takeOffTime.setHours(toHour);
-        takeOffTime.setMinutes(toMin);
-        Date landingTime = (Date) datePickerLanding.getValue();
-        int lHour = Integer.parseInt(String.valueOf(landingHour.getText()));
-        int loMin = Integer.parseInt(String.valueOf(landingMin.getText()));
-        landingTime.setHours(lHour);
-        landingTime.setMinutes(loMin);
-        String flightNumber = txtFlightNumber.getText();
-        String takeOffCountry = txtTakeOffCountry.getText();
-        String takeOffCity = txtTakeOffCity.getText();
+    private void btnAddPlaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddPlaneMouseClicked
+        String planeId = getPlaneId();
+        if (planeId == null) {
+            return;
+        }
+        String planeModel = String.valueOf(comboBoxAirplaneModel.getSelectedItem());
+        int planeAge = getPlaneAge();
+        if (planeAge < 0) {
+            return;
+        }
+        int planeSeats = getPlaneSeats();
+        if (planeSeats < 0) {
+            return;
+        }
+        // Take off time
+        Calendar takeOffTime = getTakeOffDate();
+        if (takeOffTime == null) {
+            return;
+        }
+        int takeOffHour = getTakeOffHour();
+        if (takeOffHour < 0) {
+            return;
+        }
+        takeOffTime.set(Calendar.HOUR_OF_DAY, takeOffHour);
+        int takeOffMin = getTakeOffMin();
+        if (takeOffMin < 0) {
+            return;
+        }
+        takeOffTime.set(Calendar.HOUR_OF_DAY, takeOffHour);
+        // Landing time
+        Calendar landingTime = getLandingDate();
+        if (landingTime == null) {
+            return;
+        }
+        int landingHour = getLandingHour();
+        if (landingHour < 0) {
+            return;
+        }
+        landingTime.set(Calendar.HOUR_OF_DAY, landingHour);
+        int landingMin = getLandingMin();
+        if (landingMin < 0) {
+            return;
+        }
+        landingTime.set(Calendar.MINUTE, landingMin);
+        String flightNumber = getFlightNumber();
+        if (flightNumber == null) {
+            return;
+        }
+        String takeOffCountry = getTakeOffCountry();
+        if (takeOffCountry == null) {
+            return;
+        }
+        String takeOffCity = getTakeOffCity();
+        if (takeOffCity == null) {
+            return;
+        }
         Address takeOffAdd = new Address(takeOffCountry, takeOffCity);
-        String lCountry = txtLandingCountry.getText();
-        String landingCity = txtLandingCity.getText();
-        Address landingAdd = new Address(lCountry, landingCity);
+        String landingCountry = getLandingCountry();
+        if (landingCountry == null) {
+            return;
+        }
+        String landingCity = getLandingCity();
+        if (landingCity == null) {
+            return;
+        }
+        Address landingAdd = new Address(landingCountry, landingCity);
 
-        Airplane airplane = new Airplane(pId, pModel, pAge, pSeats);
-        Flight flight = new Flight(flightNumber, airliner.getName(), airplane, takeOffTime, landingTime, takeOffAdd, landingAdd);
+        Airplane airplane = new Airplane(planeId, planeModel, planeAge, planeSeats);
+        Flight flight = new Flight(flightNumber, airliner, airplane, takeOffTime.getTime(), landingTime.getTime(), takeOffAdd, landingAdd);
         airplane.setFlight(flight);
         airliner.addFlight(flight);
 
-        airliner.getFlightList().add(flight);
-        airliner.getAirplaneList().add(airplane);
         AirlinerDirectory.addAirliner(airliner);
-        AirlinerProfile airlinerProfile = new AirlinerProfile(airliner,flight,airplane);
-        AirlinerProfileList.addAirlinerProfile(airlinerProfile);
+        AirlinerProfileList.addAirlinerProfile(new AirlinerProfile(airliner, flight, airplane));
+
         ManageAirlinersJPanel.show(this.cardSequenceJPanel, this.airliner);
-    }//GEN-LAST:event_btnAddPlaneActionPerformed
+    }//GEN-LAST:event_btnAddPlaneMouseClicked
+
+    private void txtLandingMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLandingMinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLandingMinActionPerformed
+
+    private static Calendar getToday() {
+        Calendar today = Calendar.getInstance();
+        Calendar cal=Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DATE);
+        today.set(year, month, day, 0, 0, 0);
+        return today;
+    }
+
+    private int compareCalendar(Calendar cal1, Calendar cal2) {
+        int year1 = cal1.get(Calendar.YEAR);
+        int month1 = cal1.get(Calendar.MONTH);
+        int day1 = cal1.get(Calendar.DATE);
+        int year2 = cal2.get(Calendar.YEAR);
+        int month2 = cal2.get(Calendar.MONTH);
+        int day2 = cal2.get(Calendar.DATE);
+        if (year1 > year2) {
+            return 1;
+        }
+        if (year1 < year2) {
+            return -1;
+        }
+        if (month1 > month2) {
+            return 1;
+        }
+        if (month1 < month2) {
+            return -1;
+        }
+        return Integer.compare(day1, day2);
+    }
+
+    private Calendar getTakeOffDate() {
+        Date takeOffDate = (Date) datePickerTakeOff.getValue();
+        if (takeOffDate == null) {
+            JOptionPane.showMessageDialog(this , "Please select take off date!" ,"Error" , JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+        Calendar takeOffDateCal = Calendar.getInstance();
+        takeOffDateCal.setTime(takeOffDate);
+        if (compareCalendar(takeOffDateCal, getToday()) < 0) {
+            JOptionPane.showMessageDialog(this , "Take off date should not be earlier than today!" ,"Error" , JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+        return takeOffDateCal;
+    }
+
+    private int getTakeOffHour() {
+        if (StringUtils.isBlank(txtTakeOffHour.getText())) {
+            JOptionPane.showMessageDialog(this, "Please input take off hour!","Error", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+        try {
+            int takeOffHourValue = Integer.parseInt(txtTakeOffHour.getText());
+            if (takeOffHourValue < 0 || takeOffHourValue > 23) {
+                JOptionPane.showMessageDialog(this, "Take off hour must be in [0, 23]!","Error", JOptionPane.ERROR_MESSAGE);
+                return -1;
+            }
+            return takeOffHourValue;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Take off hour must be a integer!","Error", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+    }
+
+    private int getTakeOffMin() {
+        if (StringUtils.isBlank(txtTakeOffMin.getText())) {
+            JOptionPane.showMessageDialog(this, "Please input take off minute!","Error", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+        try {
+            int takeOffMinValue = Integer.parseInt(txtTakeOffMin.getText());
+            if (takeOffMinValue < 0 || takeOffMinValue > 59) {
+                JOptionPane.showMessageDialog(this, "Take off minute must be in [0, 59]!","Error", JOptionPane.ERROR_MESSAGE);
+                return -1;
+            }
+            return takeOffMinValue;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Take off minute must be a integer!","Error", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+    }
+    private Calendar getLandingDate() {
+        Date landingDate = (Date) datePickerLanding.getValue();
+        if (landingDate == null) {
+            JOptionPane.showMessageDialog(this , "Please select landing date!" ,"Error" , JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(landingDate);
+        if (compareCalendar(calendar, getToday()) < 0) {
+            JOptionPane.showMessageDialog(this , "Landing date should not be earlier than today!" ,"Error" , JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+        return calendar;
+    }
+
+    private int getLandingHour() {
+        if (StringUtils.isBlank(txtLandingHour.getText())) {
+            JOptionPane.showMessageDialog(this, "Please input landing hour!","Error", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+        try {
+            int landingHourValue = Integer.parseInt(txtLandingHour.getText());
+            if (landingHourValue < 0 || landingHourValue > 23) {
+                JOptionPane.showMessageDialog(this, "landing hour must be in [0, 23]!","Error", JOptionPane.ERROR_MESSAGE);
+                return -1;
+            }
+            return landingHourValue;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Landing hour must be a integer!","Error", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+    }
+
+    private int getLandingMin() {
+        if (StringUtils.isBlank(txtLandingMin.getText())) {
+            JOptionPane.showMessageDialog(this, "Please input landing minute!","Error", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+        try {
+            int landingMinValue = Integer.parseInt(txtLandingMin.getText());
+            if (landingMinValue < 0 || landingMinValue > 59) {
+                JOptionPane.showMessageDialog(this, "landing minute must be in [0, 59]!","Error", JOptionPane.ERROR_MESSAGE);
+                return -1;
+            }
+            return landingMinValue;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Landing minute must be a integer!","Error", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+    }
+
+    private String getPlaneId() {
+        String planeId = txtAirPlaneId.getText();
+        if (StringUtils.isBlank(planeId)) {
+            JOptionPane.showMessageDialog(this, "Please input plane id!","Error", JOptionPane.ERROR_MESSAGE) ;
+            return null;
+        }
+        return planeId;
+    }
+
+    private String getFlightNumber() {
+        String flightNumber = txtFlightNumber.getText();
+        if (StringUtils.isBlank(flightNumber)) {
+            JOptionPane.showMessageDialog(this, "Please input flight number!","Error", JOptionPane.ERROR_MESSAGE) ;
+            return null;
+        }
+        return flightNumber;
+    }
+
+    private String getTakeOffCountry() {
+        String takeOffCountry = this.txtTakeOffCountry.getText();
+        if (StringUtils.isBlank(takeOffCountry)) {
+            JOptionPane.showMessageDialog(this, "Please input take off country","Error", JOptionPane.ERROR_MESSAGE) ;
+            return null;
+        }
+        return takeOffCountry;
+    }
+
+    private String getTakeOffCity() {
+        String takeOffCity = txtTakeOffCity.getText();
+        if (StringUtils.isBlank(takeOffCity)) {
+            JOptionPane.showMessageDialog(this, "Please input take off city","Error", JOptionPane.ERROR_MESSAGE) ;
+            return null;
+        }
+        return takeOffCity;
+    }
+
+    private String getLandingCountry() {
+        String landingCountry = txtLandingCountry.getText();
+        if (StringUtils.isBlank(landingCountry)) {
+            JOptionPane.showMessageDialog(this, "Please input landing country","Error", JOptionPane.ERROR_MESSAGE) ;
+            return null;
+        }
+        return landingCountry;
+    }
+
+    private String getLandingCity() {
+        String landingCity = txtLandingCity.getText();
+        if (StringUtils.isBlank(landingCity)) {
+            JOptionPane.showMessageDialog(this, "Please input landing city","Error", JOptionPane.ERROR_MESSAGE) ;
+            return null;
+        }
+        return landingCity;
+    }
+
+    private int getPlaneAge() {
+        if (StringUtils.isBlank(txtAirPlaneAge.getText())) {
+            JOptionPane.showMessageDialog(this, "Please input plane age!","Error", JOptionPane.ERROR_MESSAGE) ;
+            return -1;
+        }
+        try {
+            int planeAge = Integer.parseInt(txtAirPlaneAge.getText());
+            if (planeAge < 0) {
+                JOptionPane.showMessageDialog(this , "Plane age must be a nonnegative number!" ,"Error" , JOptionPane.ERROR_MESSAGE);
+                return -1;
+            }
+            return planeAge;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this , "Plane age must be a integer!" ,"Error" , JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+    }
+
+    private int getPlaneSeats() {
+        if (StringUtils.isBlank(txtAirPlaneSeats.getText())) {
+            JOptionPane.showMessageDialog(this , "Please input plane seats!" ,"Error" , JOptionPane.ERROR_MESSAGE) ;
+            return -1;
+        }
+        try {
+            int planeSeats = Integer.parseInt(txtAirPlaneSeats.getText());
+            if (planeSeats <= 0) {
+                JOptionPane.showMessageDialog(this , "Plane seats must be a positive number!" ,"Error" , JOptionPane.ERROR_MESSAGE);
+                return -1;
+            }
+            if (planeSeats % 6 != 0) {
+                JOptionPane.showMessageDialog(this , "Plane seats must be multiple of 6!" ,"Error" , JOptionPane.ERROR_MESSAGE);
+                return -1;
+            }
+            return planeSeats;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this , "Plane seats must be a integer!" ,"Error" , JOptionPane.ERROR_MESSAGE) ;
+            return -1;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddPlane;
@@ -384,8 +664,6 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField landingHour;
-    private javax.swing.JTextField landingMin;
     private javax.swing.JLabel lblAirplaneAge;
     private javax.swing.JLabel lblAirplaneId;
     private javax.swing.JLabel lblAirplaneModel;
@@ -397,8 +675,6 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
     private java.awt.Menu menu4;
     private java.awt.MenuBar menuBar1;
     private java.awt.MenuBar menuBar2;
-    private javax.swing.JTextField takeOffHour;
-    private javax.swing.JTextField takeOffMin;
     private javax.swing.JTextField txtAirPlaneAge;
     private javax.swing.JTextField txtAirPlaneId;
     private javax.swing.JTextField txtAirPlaneSeats;
@@ -406,7 +682,11 @@ public class AddAirplaneJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtFlightNumber;
     private javax.swing.JTextField txtLandingCity;
     private javax.swing.JTextField txtLandingCountry;
+    private javax.swing.JTextField txtLandingHour;
+    private javax.swing.JTextField txtLandingMin;
     private javax.swing.JTextField txtTakeOffCity;
     private javax.swing.JTextField txtTakeOffCountry;
+    private javax.swing.JTextField txtTakeOffHour;
+    private javax.swing.JTextField txtTakeOffMin;
     // End of variables declaration//GEN-END:variables
 }

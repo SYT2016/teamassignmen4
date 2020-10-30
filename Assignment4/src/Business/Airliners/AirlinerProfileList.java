@@ -1,30 +1,23 @@
 package Business.Airliners;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AirlinerProfileList {
-//    private List<AirlinerProfile> airlinerProfileList;
-//
-//    public AirlinerProfileList(){
-//        airlinerProfileList = new ArrayList<>();
-//    }
-//
-//    public List<AirlinerProfile> getAirlinerProfileList() {
-//        return airlinerProfileList;
-//    }
-//
-//    public void setAirlinerProfileList(List<AirlinerProfile> airlinerProfileList) {
-//        this.airlinerProfileList = airlinerProfileList;
-//    }
 
-    private static final ArrayList<AirlinerProfile> AIRLINER_PROFILE_LIST = new ArrayList<>();
+    private static final Map<String, AirlinerProfile> AIRLINER_PROFILE_MAP = new HashMap<>();
 
     public static void addAirlinerProfile(AirlinerProfile airlinerProfile) {
-        AIRLINER_PROFILE_LIST.add(airlinerProfile);
+        AIRLINER_PROFILE_MAP.put(airlinerProfile.hash(), airlinerProfile);
+    }
+
+    public static void replaceAirlinerProfile(AirlinerProfile airlinerProfile1, AirlinerProfile airlinerProfile2) {
+        AIRLINER_PROFILE_MAP.put(airlinerProfile1.hash(), airlinerProfile2);
     }
 
     public List<AirlinerProfile> getAirlinerProfileList() {
-        return AIRLINER_PROFILE_LIST;
+        return new ArrayList<>(AIRLINER_PROFILE_MAP.values());
     }
 }
