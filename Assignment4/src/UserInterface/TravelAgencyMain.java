@@ -5,17 +5,23 @@
  */
 package UserInterface;
 
+
+import Business.Airliners.Airliner;
+import Business.Airliners.AirlinerDirectory;
+import Business.Airliners.AirlinerProfile;
+import Business.Airliners.AirlinerProfileList;
+import Business.Airplane.Airplane;
+import Business.Flight.Flight;
+import Util.Address;
 import Business.Customer.AssignCusToFlightList;
 import Business.Customer.CustomeProfileList;
 import Business.Customer.CustomerDirectory;
 import Business.Flight.FlightSchedule;
-import UserInterface.ManageCustomers.CreateNewCustomerJpanel;
-import UserInterface.ManageCustomers.ViewCusProfilesJPanel;
-import UserInterface.ManagerAirliners.CreateAirlinerJPanel;
-import UserInterface.ManagerAirliners.ManageAirlinersJPanel;
+
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Calendar;
 
 /**
  *
@@ -31,7 +37,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         initComponents();
         this.customerDirectory=new CustomerDirectory();
         this.flightSchedule=new FlightSchedule();
-        this.cusPros=new CustomeProfileList();
+        this.cusPros=new CustomeProfileList(this.customerDirectory);
         this.assignList=new AssignCusToFlightList();
     }
 
@@ -48,10 +54,8 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         CardSequenceJPanel = new javax.swing.JPanel();
         jPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        btnAddAirliner = new javax.swing.JButton();
-        btnManageAirliner = new javax.swing.JButton();
-        btnAddCus = new javax.swing.JButton();
-        btnManageCus = new javax.swing.JButton();
+        btnCusIssues = new javax.swing.JButton();
+        btnAirlinerIssue = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,31 +64,17 @@ public class TravelAgencyMain extends javax.swing.JFrame {
 
         jPanel.setLayout(new java.awt.CardLayout());
 
-        btnAddAirliner.setText("Create Airliner");
-        btnAddAirliner.addActionListener(new java.awt.event.ActionListener() {
+        btnCusIssues.setText("Customer Issues");
+        btnCusIssues.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddAirlinerActionPerformed(evt);
+                btnCusIssuesActionPerformed(evt);
             }
         });
 
-        btnManageAirliner.setText("Manager Airliners");
-        btnManageAirliner.addActionListener(new java.awt.event.ActionListener() {
+        btnAirlinerIssue.setText("Airliner Issues");
+        btnAirlinerIssue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageAirlinerActionPerformed(evt);
-            }
-        });
-
-        btnAddCus.setText("Create Customer");
-        btnAddCus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddCusActionPerformed(evt);
-            }
-        });
-
-        btnManageCus.setText("Manager Customers");
-        btnManageCus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageCusActionPerformed(evt);
+                btnAirlinerIssueActionPerformed(evt);
             }
         });
 
@@ -92,26 +82,21 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(63, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnManageCus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAddCus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnManageAirliner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAddAirliner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnAirlinerIssue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCusIssues, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(btnAddAirliner)
-                .addGap(32, 32, 32)
-                .addComponent(btnManageAirliner)
-                .addGap(39, 39, 39)
-                .addComponent(btnAddCus)
-                .addGap(39, 39, 39)
-                .addComponent(btnManageCus)
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addGap(231, 231, 231)
+                .addComponent(btnAirlinerIssue)
+                .addGap(118, 118, 118)
+                .addComponent(btnCusIssues)
+                .addContainerGap(618, Short.MAX_VALUE))
         );
 
         jPanel.add(jPanel1, "card2");
@@ -132,30 +117,22 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddAirlinerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAirlinerActionPerformed
-        CreateAirlinerJPanel createAirlinerJPanel = new CreateAirlinerJPanel(this.CardSequenceJPanel);
-        this.CardSequenceJPanel.add("CreateAirlinerJPanel", createAirlinerJPanel);
+
+
+    private void btnCusIssuesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCusIssuesActionPerformed
+        CusIssueWorkAreaJPanel jp = new CusIssueWorkAreaJPanel(this.CardSequenceJPanel, customerDirectory, cusPros, flightSchedule, assignList);
+        this.CardSequenceJPanel.add("CusIssueWorkAreaJPanel", jp);
         CardLayout layout = (CardLayout) this.CardSequenceJPanel.getLayout();
         layout.next(this.CardSequenceJPanel);
-    }//GEN-LAST:event_btnAddAirlinerActionPerformed
+    }//GEN-LAST:event_btnCusIssuesActionPerformed
 
-    private void btnManageAirlinerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageAirlinerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnManageAirlinerActionPerformed
-
-    private void btnAddCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCusActionPerformed
-        CreateNewCustomerJpanel createCustomerJPanel = new CreateNewCustomerJpanel(this.CardSequenceJPanel,customerDirectory);
-        this.CardSequenceJPanel.add("CreateNewCustomerJPanel", createCustomerJPanel);
+    private void btnAirlinerIssueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinerIssueActionPerformed
+        AirlinerIssueWorkAreaJPanel jp = new AirlinerIssueWorkAreaJPanel(this.CardSequenceJPanel);
+        this.CardSequenceJPanel.add("AirlinerIssueWorkAreaJPanel", jp);
         CardLayout layout = (CardLayout) this.CardSequenceJPanel.getLayout();
         layout.next(this.CardSequenceJPanel);
-    }//GEN-LAST:event_btnAddCusActionPerformed
+    }//GEN-LAST:event_btnAirlinerIssueActionPerformed
 
-    private void btnManageCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCusActionPerformed
-        ViewCusProfilesJPanel jp=new ViewCusProfilesJPanel(CardSequenceJPanel, cusPros, flightSchedule,assignList);
-        this.CardSequenceJPanel.add("ViewCusProfilesJPanel",jp);
-        CardLayout l=(CardLayout)this.CardSequenceJPanel.getLayout();
-        l.next(this.CardSequenceJPanel);
-    }//GEN-LAST:event_btnManageCusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,17 +164,34 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                initTest();
                 new TravelAgencyMain().setVisible(true);
             }
         });
     }
 
+    private static void initTest() {
+        Airliner airliner = new Airliner("China", "China", "Beijing", "123");
+        AirlinerDirectory.addAirliner(airliner);
+
+        Airplane airplane = new Airplane("000001", "S", 1, 120);
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.set(2020, Calendar.OCTOBER, 30, 10, 20);
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.set(2020, Calendar.OCTOBER, 30, 13, 40);
+        Flight flight = new Flight("CA8688",
+                new Airliner("China", "China", "Beijing", "123"), airplane,
+                calendar1.getTime(), calendar2.getTime(),
+                new Address("China", "Shanghai"), new Address("China", "Shangzhi"));
+        airliner.addFlight(flight);
+
+        AirlinerProfileList.addAirlinerProfile(new AirlinerProfile(airliner, flight, airplane));
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CardSequenceJPanel;
-    private javax.swing.JButton btnAddAirliner;
-    private javax.swing.JButton btnAddCus;
-    private javax.swing.JButton btnManageAirliner;
-    private javax.swing.JButton btnManageCus;
+    private javax.swing.JButton btnAirlinerIssue;
+    private javax.swing.JButton btnCusIssues;
     private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;

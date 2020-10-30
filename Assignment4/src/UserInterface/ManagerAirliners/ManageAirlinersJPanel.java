@@ -20,7 +20,7 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
 
     private final JPanel cardSequenceJPanel;
 
-    private final Airliner airliner;
+    private Airliner airliner;
 
     /**
      * Creates new form ManageAirlinersJPanel
@@ -29,7 +29,7 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
         this.cardSequenceJPanel = cardSequenceJPanel;
         this.airliner = airliner;
         initComponents();
-        refreshTable();
+        refreshTable(this.airliner);
     }
 
     public static void show(JPanel cardSequenceJPanel, Airliner airliner) {
@@ -144,14 +144,27 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnViewFlightDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewFlightDetailsActionPerformed
-        // TODO add your handling code here:
+        int row = tblFlightDetails.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(null, "Pls select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Flight flight = (Flight) tblFlightDetails.getValueAt(row, 0);
+        ViewAirlineJPanel.show(this.cardSequenceJPanel, flight);
     }//GEN-LAST:event_btnViewFlightDetailsActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+//        cardSequenceJPanel.remove(this);
+//        Component[] componentArray = cardSequenceJPanel.getComponents();
+//        Component component = componentArray[componentArray.length - 1];
+//        ManageAirlinersJPanel manageProductCatalogJPanel = (ManageAirlinersJPanel) component;
+//        manageProductCatalogJPanel.refreshTable();
+//        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+//        layout.previous(cardSequenceJPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    public void refreshTable() {
+    public void refreshTable(Airliner airliner) {
+        this.airliner = airliner;
         int rowCount = tblFlightDetails.getRowCount();
         DefaultTableModel model = (DefaultTableModel)tblFlightDetails.getModel();
         for(int i=rowCount-1;i>=0;i--) {
@@ -159,12 +172,11 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
         }
         for(Flight flight : airliner.getFlightList()) {
             Object[] row = new Object[6];
-            row[0] = flight.getFlightNumber();
+            row[0] = flight;
             row[1] = flight.getTakeOffPlace().toString();
             row[2] = flight.getLandingPlace().toString();
             row[3] = flight.getTakeOffTime();
             row[4] = flight.getLandingTime();
-            row[5] = flight;
             model.addRow(row);
         }
     }

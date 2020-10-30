@@ -8,13 +8,10 @@ package Business.Airliners;
 import Business.Airplane.Airplane;
 import Business.Flight.Flight;
 
-import java.util.ArrayList;
-
 /**
- *
- * @author 16104
+ * 某一个航空公司的详细信息+该航空公司旗下的所有Flight的List
+ * @author Cong
  */
-//某一个航空公司的详细信息+该航空公司旗下的所有Flight的List
 public class AirlinerProfile {
     private Airliner airliner;
     private Flight flight;
@@ -27,6 +24,10 @@ public class AirlinerProfile {
         this.airliner = airliner;
         this.flight = flight;
         this.airplane = airplane;
+    }
+
+    public String hash() {
+        return String.join("_", airliner.getName() + flight.getFlightNumber() + airplane.getAirplaneID());
     }
 
     public Airliner getAirliner() {

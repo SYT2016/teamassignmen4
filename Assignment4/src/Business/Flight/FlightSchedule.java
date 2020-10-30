@@ -5,6 +5,7 @@
  */
 package Business.Flight;
 
+import Business.Airliners.Airliner;
 import Business.Airplane.Airplane;
 import Util.Address;
 
@@ -25,8 +26,8 @@ public class FlightSchedule {
     }
 
     //在FlightSchedule里面加入一个flight
-    public Flight addFlight(String flightNumber, String airlinerName, Airplane airplane, Date takeOffTime, Date landingTime, Address takeoffPlace, Address arrivePlace) {
-        Flight flight = new Flight(flightNumber, airlinerName, airplane, takeOffTime, landingTime, takeoffPlace, arrivePlace);
+    public Flight addFlight(String flightNumber, Airliner airliner, Airplane airplane, Date takeOffTime, Date landingTime, Address takeoffPlace, Address arrivePlace) {
+        Flight flight = new Flight(flightNumber, airliner, airplane, takeOffTime, landingTime, takeoffPlace, arrivePlace);
 
         FlightList.add(flight);
         addFlightToAirlinerList(flight);
@@ -77,7 +78,7 @@ public class FlightSchedule {
     public ArrayList<Flight> getAirlinerFlightList(String name) {
         ArrayList<Flight> airlinerflightlist = new ArrayList<Flight>();
         for (Flight flight : FlightList) {
-            if (flight.getAirlinerName().equals(name))
+            if (flight.getAirliner().getName().equals(name))
                 airlinerflightlist.add(flight);
 
         }
@@ -85,10 +86,22 @@ public class FlightSchedule {
 
     }
     
-    public ArrayList<Flight> getFlightListThroughDate(Date d){
+    //根据日期找航班
+    public ArrayList<Flight> getFlightListThroughDate(Date d,ArrayList<Flight> arr){
+        ArrayList<Flight> l=new ArrayList<Flight>();
+        for(Flight f:arr){
+            if(f.getTakeOffTime().before(d)){
+                l.add(f);
+            }
+        }
+        return l;
+    }
+    
+    //根据地点找航班
+    public ArrayList<Flight> getFlightThroughAddress(Address from,Address to){
         ArrayList<Flight> l=new ArrayList<Flight>();
         for(Flight f:FlightList){
-            if(f.getTakeOffTime().before(d)){
+            if(f.getTakeOffPlace().toString().equals(from.toString()) && f.getLandingPlace().toString().equals(to.toString())){
                 l.add(f);
             }
         }

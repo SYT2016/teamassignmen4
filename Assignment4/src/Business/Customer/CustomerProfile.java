@@ -22,6 +22,17 @@ public class CustomerProfile {
     private Date backTime;
     private boolean isBookFlight;
     
+    public CustomerProfile(){}
+    
+    public CustomerProfile(Customer customer,Address from,Address to,Date departTime,Date backTime){
+        this.customer=customer;
+        this.from=from;
+        this.to=to;
+        this.departTime=departTime;
+        this.backTime=backTime;
+        this.isBookFlight=true;
+    }
+    
     @Override
     public String toString(){
         return customer.getName();

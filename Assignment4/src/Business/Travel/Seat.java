@@ -18,6 +18,8 @@ public class Seat {
 
     private boolean isOccupy;
 
+    private String seatNo;
+
     public Seat() {
         this.isOccupy = false;
     }
@@ -26,6 +28,13 @@ public class Seat {
         this.row = row;
         this.column = column;
         this.isOccupy = true;
+    }
+    
+    public Seat(int row, String column, String seatNo) {
+        this.row = row;
+        this.column = column;
+        this.seatNo = seatNo;
+        //this.isOccupy = true;
     }
 
     public int getRow() {
@@ -50,5 +59,15 @@ public class Seat {
 
     public void setOccupy(boolean occupy) {
         isOccupy = occupy;
+    }
+
+    @Override
+    public String toString() {
+        return "Seat{" +
+                "row=" + row +
+                ", column='" + column + '\'' +
+                ", isOccupy=" + isOccupy +
+                ", seatNo='" + seatNo + '\'' +
+                '}';
     }
 }

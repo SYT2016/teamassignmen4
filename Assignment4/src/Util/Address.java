@@ -15,7 +15,7 @@ public class Address {
 
     public Address() {
     }
-
+    
     public Address(String Country, String City, String airportName) {//起飞，降落机场
         this.country = Country;
         this.city = City;
@@ -26,8 +26,6 @@ public class Address {
     public Address(String Country, String City) {//公司地点
         this.country = Country;
         this.city = City;
-
-
     }
 
     public String getCountry() {
