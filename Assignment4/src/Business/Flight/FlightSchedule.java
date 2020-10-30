@@ -107,6 +107,17 @@ public class FlightSchedule {
         }
         return l;
     }
+    
+    //查找还有空余座位的航班
+    public ArrayList<Flight> getFlightThroughAvailSeats(){
+        ArrayList<Flight> l=new ArrayList<Flight>();
+        for(Flight f:FlightList){
+            if(f.getAvailSeats()>0){
+                l.add(f);
+            }
+        }
+        return l;
+    }
 
     public ArrayList<Flight> getFlightList() {
         return FlightList;

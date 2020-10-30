@@ -98,7 +98,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnSearchFlights">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Serach Flights"/>
+        <Property name="text" type="java.lang.String" value="Search Flights"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchFlightsActionPerformed"/>
