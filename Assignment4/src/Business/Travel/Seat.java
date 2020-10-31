@@ -34,7 +34,7 @@ public class Seat {
         this.row = row;
         this.column = column;
         this.seatNo = seatNo;
-        //this.isOccupy = true;
+        this.isOccupy = false;//false when initializing
     }
 
     public int getRow() {
@@ -53,14 +53,24 @@ public class Seat {
         this.column = column;
     }
 
-    public boolean isOccupy() {
+    public boolean isIsOccupy() {
         return isOccupy;
     }
 
-    public void setOccupy(boolean occupy) {
-        isOccupy = occupy;
+    public void setIsOccupy(boolean isOccupy) {
+        this.isOccupy = isOccupy;
     }
 
+    public String getSeatNo() {
+        return seatNo;
+    }
+
+    public void setSeatNo(String seatNo) {
+        this.seatNo = seatNo;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "Seat{" +

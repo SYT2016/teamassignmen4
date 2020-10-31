@@ -52,7 +52,7 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
             row[1]=sdf.format(f.getTakeOffTime());
             row[2]=sdf.format(f.getLandingTime());
             row[3]=f.getAirliner().getName();
-            row[4]=f.getRemainAvailSeat()+"";
+            row[4]=f.getAvailSeats()+"";
             dtm.addRow(row);
         }
     }

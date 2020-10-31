@@ -29,11 +29,12 @@ public class CusIssueWorkAreaJPanel extends javax.swing.JPanel {
     private AssignCusToFlightList assignList;
     public CusIssueWorkAreaJPanel(JPanel cardSequence,CustomerDirectory customerDirectory,CustomeProfileList cusPros,FlightSchedule flightSchedule,AssignCusToFlightList assignList) {
         initComponents();
+        
         this.cardSequence=cardSequence;
-        this.customerDirectory=new CustomerDirectory();
-        this.flightSchedule=new FlightSchedule();
-        this.cusPros=new CustomeProfileList(this.customerDirectory);
-        this.assignList=new AssignCusToFlightList();
+        this.customerDirectory= TravelAgencyMain.customerDirectory;
+        this.flightSchedule= new FlightSchedule();
+        this.cusPros= TravelAgencyMain.cusPros;
+        this.assignList=TravelAgencyMain.assignList;
     }
 
     /**

@@ -127,7 +127,7 @@ public class BookFlightJPanel extends javax.swing.JPanel {
         comboRow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25" }));
         add(comboRow, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, -1, -1));
 
-        comboColumn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A(Window)", "B(Middle)", "C(Aisle)", "D(Aisle)", "E(Middle)", "F(Window)" }));
+        comboColumn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A(WINDOW)", "B(MIDDLE)", "C(AISLE)", "D(AISLE)", "E(MIDDLE)", "F(WINDOW)" }));
         add(comboColumn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, -1, -1));
 
         btnSubmit.setText("Submit");
@@ -150,17 +150,26 @@ public class BookFlightJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_BtnBackActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-       
+       //座位行列
         int row=comboRow.getSelectedIndex()+1;
-        String column=comboColumn.getSelectedItem().toString().substring(0,1);
-        flight.changeSeatCondition(row, column);
-        flight.setRemainAvailSeat(flight.getAvailSeats()-1);
-        Seat seat=new Seat(row,column);
-        Ticket ticket=new Ticket(seat,flight);
-        AssignCusToFlight cusToFli=new AssignCusToFlight(cusPro,flight,ticket);
-        assignList.addIn(cusToFli);
-        cusPro.setIsBookFlight(true);      
-        JOptionPane.showMessageDialog(null, "Book A Flight Successfully");
+        String seatNo=comboColumn.getSelectedItem().toString().substring(0,1);//ABCDEF
+        String column=comboColumn.getSelectedItem().toString().substring(1);//WINDOW,MIDDLE,AISLE
+        
+        if(flight.checkSeatCondition(row,seatNo)){
+            flight.changeSeatCondition(row, seatNo);
+            int before=flight.getRemainAvailSeat();
+            flight.setRemainAvailSeat(before-1);
+            Seat seat=new Seat(row,column,seatNo);
+            seat.setIsOccupy(true);
+            Ticket ticket=new Ticket(seat,flight);
+            AssignCusToFlight cusToFli=new AssignCusToFlight(cusPro,flight,ticket);
+            assignList.addIn(cusToFli);
+            cusPro.setIsBookFlight(true);      
+            JOptionPane.showMessageDialog(null, "Book A Flight Successfully");
+        }else{
+            JOptionPane.showMessageDialog(null, "The seat has been occupied. Please select another one");
+        }
+        
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 

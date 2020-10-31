@@ -65,7 +65,6 @@ public class ViewCusProfilesJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnSearchFlights = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        btnNotBook = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -100,14 +99,6 @@ public class ViewCusProfilesJPanel extends javax.swing.JPanel {
             }
         });
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
-
-        btnNotBook.setText("Without Booking");
-        btnNotBook.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNotBookActionPerformed(evt);
-            }
-        });
-        add(btnNotBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchFlightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchFlightsActionPerformed
@@ -131,14 +122,9 @@ public class ViewCusProfilesJPanel extends javax.swing.JPanel {
         layout.previous(cardSequence);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnNotBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotBookActionPerformed
-        populate(cusPros.getNotBookList());
-    }//GEN-LAST:event_btnNotBookActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnNotBook;
     private javax.swing.JButton btnSearchFlights;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

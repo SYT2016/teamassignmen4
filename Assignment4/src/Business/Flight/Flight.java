@@ -47,6 +47,7 @@ public class Flight {
         this.landingTime = landingTime;
         this.takeOffPlace = takeOffPlace;
         this.landingPlace = landingPlace;
+        this.remainAvailSeat=getAvailSeats();
         initSeats(this.airplane.getNumOfSeats());
     }
 
@@ -91,19 +92,28 @@ public class Flight {
     public int getAvailSeats(){
         int num=0;
         for(Seat s:seatList){
-            if(!s.isOccupy()) num++;
+            if(!s.isIsOccupy()) num++;
         }
         return num;
     }
     
-    //预订航班后座位信息的变化
-    public void changeSeatCondition(int row,String column){
+    //预订航班后座位信息的变化。输入(1,A)这种
+    public boolean checkSeatCondition(int row,String seatNo){
         for(Seat s:seatList){
-            if(s.getRow()==row && s.getColumn().equals(column)){
-                if(s.isOccupy()){
-                    JOptionPane.showMessageDialog(null, "The seat has been occupied. Please select another one");
-                    break;
-                }else s.setOccupy(true);
+            if((row+""+seatNo).equals(s.getSeatNo())){
+                if(s.isIsOccupy()){
+                    //JOptionPane.showMessageDialog(null, "The seat has been occupied. Please select another one");
+                    return false;
+                }
+            }          
+        }
+        return true;
+    }
+    
+    public void changeSeatCondition(int row,String seatNo){
+        for(Seat s:seatList){
+            if((row+""+seatNo).equals(s.getSeatNo())){
+                s.setIsOccupy(true);
             }          
         }
     }
