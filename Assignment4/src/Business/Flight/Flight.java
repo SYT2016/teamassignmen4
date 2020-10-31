@@ -33,6 +33,7 @@ public class Flight {
      * 到达的国家，城市，机场
      */
     private Address landingPlace;
+    private int remainAvailSeat;
     private List<Seat> seatList = new ArrayList<>();
 
     public Flight() {
@@ -111,6 +112,15 @@ public class Flight {
     public String toString(){
         return this.flightNumber;
     }
+
+    public int getRemainAvailSeat() {
+        return remainAvailSeat;
+    }
+
+    public void setRemainAvailSeat(int remainAvailSeat) {
+        this.remainAvailSeat = remainAvailSeat;
+    }    
+    
 
     public Airliner getAirliner() {
         return airliner;

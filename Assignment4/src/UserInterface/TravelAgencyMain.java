@@ -171,21 +171,129 @@ public class TravelAgencyMain extends javax.swing.JFrame {
     }
 
     private static void initTest() {
-        Airliner airliner = new Airliner("China", "China", "Beijing", "123");
+        Airliner airliner = new Airliner("China", "China", "Beijing", "123");//公司名字+公司country+公司city+公司登录密码
         AirlinerDirectory.addAirliner(airliner);
 
-        Airplane airplane = new Airplane("000001", "S", 1, 120);
+        Airplane airplane = new Airplane("000001", "S", 1, 150);// id +型号+ 机龄+ 座位数（6的倍数）
         Calendar calendar1 = Calendar.getInstance();
-        calendar1.set(2020, Calendar.OCTOBER, 30, 10, 20);
+        calendar1.set(2020, Calendar.NOVEMBER, 1, 12, 20);//起飞时间
         Calendar calendar2 = Calendar.getInstance();
-        calendar2.set(2020, Calendar.OCTOBER, 30, 13, 40);
+        calendar2.set(2020, Calendar.NOVEMBER, 1, 14, 40);//降落时间
         Flight flight = new Flight("CA8688",
-                new Airliner("China", "China", "Beijing", "123"), airplane,
+                airliner, airplane,
                 calendar1.getTime(), calendar2.getTime(),
-                new Address("China", "Shanghai"), new Address("China", "Shangzhi"));
+                new Address("China", "Shanghai"), new Address("China", "Shangzhi"));//起飞地降落地
+        flight.setRemainAvailSeat(150);
         airliner.addFlight(flight);
-
+        //FlightSchedule.addFlight(flight);
         AirlinerProfileList.addAirlinerProfile(new AirlinerProfile(airliner, flight, airplane));
+        
+        Calendar c21 = Calendar.getInstance();
+        calendar1.set(2020, Calendar.NOVEMBER, 2, 10, 20);//起飞时间
+        Calendar c22 = Calendar.getInstance();
+        calendar2.set(2020, Calendar.NOVEMBER, 2, 13, 40);//降落时间
+        Flight f1 = new Flight("CA8689",
+                airliner, airplane,
+                c21.getTime(), c22.getTime(),
+                new Address("China", "Shanghai"), new Address("China", "Changsha"));//起飞地降落地
+        f1.setRemainAvailSeat(150);
+        airliner.addFlight(f1);
+        //FlightSchedule.addFlight(f1);
+        AirlinerProfileList.addAirlinerProfile(new AirlinerProfile(airliner, f1, airplane));
+        
+        Calendar c31 = Calendar.getInstance();
+        calendar1.set(2020, Calendar.NOVEMBER, 1, 15, 30);//起飞时间
+        Calendar c32 = Calendar.getInstance();
+        calendar2.set(2020, Calendar.NOVEMBER, 1, 17, 50);//降落时间
+        Flight f2 = new Flight("CA8690",
+                airliner, airplane,
+                c31.getTime(), c32.getTime(),
+                new Address("US", "NY"), new Address("US", "Seattle"));//起飞地降落地
+        f2.setRemainAvailSeat(150);
+        airliner.addFlight(f2);
+        AirlinerProfileList.addAirlinerProfile(new AirlinerProfile(airliner, f2, airplane));
+        //FlightSchedule.addFlight(f2);
+        
+        Calendar c41 = Calendar.getInstance();
+        calendar1.set(2020, Calendar.NOVEMBER, 3, 10, 20);//起飞时间
+        Calendar c42 = Calendar.getInstance();
+        calendar2.set(2020, Calendar.NOVEMBER, 3, 14, 30);//降落时间
+        Flight f3 = new Flight("CA8691",
+                airliner, airplane,
+                c41.getTime(), c42.getTime(),
+                new Address("US", "Seattle"), new Address("US", "NY"));//起飞地降落地
+        f3.setRemainAvailSeat(150);
+        airliner.addFlight(f3);
+        AirlinerProfileList.addAirlinerProfile(new AirlinerProfile(airliner, f3, airplane));
+        //FlightSchedule.addFlight(f3);
+        
+        Calendar c51 = Calendar.getInstance();
+        calendar1.set(2020, Calendar.NOVEMBER, 5, 12, 20);//起飞时间
+        Calendar c52 = Calendar.getInstance();
+        calendar2.set(2020, Calendar.NOVEMBER, 5, 14, 40);//降落时间
+        Flight f4 = new Flight("CA8692",
+                airliner, airplane,
+                c51.getTime(), c52.getTime(),
+                new Address("US", "Seattle"), new Address("US", "NY"));//起飞地降落地
+        f4.setRemainAvailSeat(150);
+        airliner.addFlight(f4);
+        AirlinerProfileList.addAirlinerProfile(new AirlinerProfile(airliner, f4, airplane));
+        //FlightSchedule.addFlight(f4);
+        
+        Airliner airliner1 = new Airliner("NEU", "USA", "Boston", "123");//公司名字+公司country+公司city+公司登录密码
+        AirlinerDirectory.addAirliner(airliner1);
+
+        Airplane airplane1 = new Airplane("000002", "S", 1, 150);// id +型号+ 机龄+ 座位数
+        Calendar c61 = Calendar.getInstance();
+        c61.set(2021, Calendar.JANUARY, 2, 10, 20);
+        Calendar c62 = Calendar.getInstance();
+        c62.set(2021, Calendar.JANUARY, 2, 13, 40);
+        Flight flight11 = new Flight("CA8693",
+                airliner1, airplane1,
+                c61.getTime(), c61.getTime(),
+                new Address("China", "Shanghai"), new Address("US", "Boston"));//起飞地降落地
+        flight11.setRemainAvailSeat(150);
+        airliner1.addFlight(flight11);
+        AirlinerProfileList.addAirlinerProfile(new AirlinerProfile(airliner1, flight11, airplane1));
+        //FlightSchedule.addFlight(flight11);
+        
+        Calendar c71 = Calendar.getInstance();
+        c71.set(2021, Calendar.JUNE, 28, 10, 20);
+        Calendar c72 = Calendar.getInstance();
+        c72.set(2021, Calendar.JUNE, 28, 13, 40);
+        Flight flight12 = new Flight("CA8694",
+                airliner1, airplane1,
+                c72.getTime(), c72.getTime(),
+                new Address("US", "NY"), new Address("US", "Seattle"));//起飞地降落地
+        flight12.setRemainAvailSeat(150);
+        airliner1.addFlight(flight12);
+        AirlinerProfileList.addAirlinerProfile(new AirlinerProfile(airliner1, flight12, airplane1));
+        //FlightSchedule.addFlight(flight12);
+        
+        Calendar c81 = Calendar.getInstance();
+        c81.set(2021, Calendar.JANUARY, 1, 10, 20);
+        Calendar c82 = Calendar.getInstance();
+        c82.set(2021, Calendar.JANUARY, 1, 14, 40);
+        Flight flight13 = new Flight("CA8695",
+                airliner1, airplane1,
+                c81.getTime(), c82.getTime(),
+                new Address("US", "NY"), new Address("US", "Seattle"));//起飞地降落地
+        flight13.setRemainAvailSeat(150);
+        airliner1.addFlight(flight13);
+        AirlinerProfileList.addAirlinerProfile(new AirlinerProfile(airliner1, flight13, airplane1));
+        //FlightSchedule.addFlight(flight13);
+        
+        Calendar c91 = Calendar.getInstance();
+        c91.set(2021, Calendar.JANUARY, 3, 13, 20);
+        Calendar c92 = Calendar.getInstance();
+        c92.set(2021, Calendar.JANUARY, 3, 15, 40);
+        Flight flight14 = new Flight("CA8696",
+                airliner1, airplane1,
+                c91.getTime(), c92.getTime(),
+                new Address("US", "NY"), new Address("US", "Seattle"));//起飞地降落地
+        flight14.setRemainAvailSeat(150);
+        airliner1.addFlight(flight14);
+        AirlinerProfileList.addAirlinerProfile(new AirlinerProfile(airliner1, flight14, airplane1));       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

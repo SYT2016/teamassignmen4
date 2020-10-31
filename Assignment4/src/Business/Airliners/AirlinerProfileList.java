@@ -17,7 +17,7 @@ public class AirlinerProfileList {
         AIRLINER_PROFILE_MAP.put(airlinerProfile1.hash(), airlinerProfile2);
     }
 
-    public List<AirlinerProfile> getAirlinerProfileList() {
+    public static List<AirlinerProfile> getAirlinerProfileList() {
         return new ArrayList<>(AIRLINER_PROFILE_MAP.values());
     }
 }

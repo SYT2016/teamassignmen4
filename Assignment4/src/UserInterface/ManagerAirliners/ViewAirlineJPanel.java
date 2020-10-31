@@ -116,6 +116,12 @@ public class ViewAirlineJPanel extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         lblTitle.setText("View airplane details");
 
+        takeOffMin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                takeOffMinActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Flight Number:");
 
         jLabel5.setText("Take off time:");
@@ -158,6 +164,11 @@ public class ViewAirlineJPanel extends javax.swing.JPanel {
         btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBackMouseClicked(evt);
+            }
+        });
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
             }
         });
 
@@ -317,7 +328,7 @@ public class ViewAirlineJPanel extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(takeOffHour, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel6))
-                            .addComponent(takeOffMin))
+                            .addComponent(takeOffMin, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
@@ -411,6 +422,14 @@ public class ViewAirlineJPanel extends javax.swing.JPanel {
     private void landingHourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_landingHourActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_landingHourActionPerformed
+
+    private void takeOffMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_takeOffMinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_takeOffMinActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnUpdateMouseClicked(java.awt.event.MouseEvent evt) {                                       
         String planeId = getPlaneId();

@@ -10,7 +10,7 @@ import Business.Flight.Flight;
 /**
  * @author 16104
  */
-//存储飞机的详细信息，包括飞机型号(S/M/L)，是否提供餐饮，机龄，飞机ID
+//存储飞机的详细信息，包括飞机型号(S/M/L)，机龄，飞机ID
 public class Airplane {
     private String airplaneID;
     private String airplaneModel;

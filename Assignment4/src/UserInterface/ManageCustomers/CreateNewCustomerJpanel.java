@@ -102,15 +102,32 @@ public class CreateNewCustomerJpanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_radioBtnMaleActionPerformed
 
+    public boolean check(){
+        if(txtName.getText().equals("") || txtAge.getText().equals("") ||
+                txtID.getText().equals("") || txtPhone.getText().equals("")){
+            return false;
+        }else{
+            if(Integer.parseInt(txtAge.getText())<0) return false;
+            if(radioBtnMale.isSelected()&&radioBtnFemale.isSelected()) return false;
+            if(!radioBtnMale.isSelected()&&!radioBtnFemale.isSelected()) return false;
+        }
+        return true;
+    }
+    
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        Customer c=customerDirectory.addCustomer();
-        c.setName(txtName.getText());
-        c.setAge(Integer.parseInt(txtAge.getText()));
-        c.setCustomerID(txtID.getText());
-        if(radioBtnMale.isSelected()) c.setGender(radioBtnMale.getText());
-        else c.setGender(radioBtnFemale.getText());
-        c.setPhone(txtPhone.getText());
-        JOptionPane.showMessageDialog(null, "Save Successfully!");
+        if(check()){
+            Customer c=customerDirectory.addCustomer();
+            c.setName(txtName.getText());
+            c.setAge(Integer.parseInt(txtAge.getText()));
+            c.setCustomerID(txtID.getText());
+            if(radioBtnMale.isSelected()) c.setGender(radioBtnMale.getText());
+            else c.setGender(radioBtnFemale.getText());
+            c.setPhone(txtPhone.getText());
+            JOptionPane.showMessageDialog(null, "Save Successfully!");
+        }else{
+            JOptionPane.showMessageDialog(null, "There exists invalid inputs. Please input again.");
+        }
+        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

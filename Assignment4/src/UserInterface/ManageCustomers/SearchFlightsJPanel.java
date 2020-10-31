@@ -10,6 +10,7 @@ import Business.Customer.CustomerProfile;
 import Business.Flight.Flight;
 import Business.Flight.FlightSchedule;
 import Util.DateUtil;
+import Util.Sort;
 import java.awt.CardLayout;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,16 +44,21 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
     public void populate(ArrayList<Flight> l){
         DefaultTableModel dtm=(DefaultTableModel)tblSearchFlights.getModel();
         dtm.setRowCount(0);
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH-mm");
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        //Sort.sortInTime(l);
         for(Flight f:l){
             Object[] row=new Object[5];
             row[0]=f;
             row[1]=sdf.format(f.getTakeOffTime());
             row[2]=sdf.format(f.getLandingTime());
             row[3]=f.getAirliner().getName();
-            row[4]=f.getAvailSeats()+"";
+            row[4]=f.getRemainAvailSeat()+"";
             dtm.addRow(row);
         }
+    }
+    
+    public FlightSchedule getFlightSche(){
+        return this.flightSchedule;
     }
 
     /**
@@ -75,6 +81,7 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
         tblSearchFlights = new javax.swing.JTable();
         btnBook = new javax.swing.JButton();
         BtnBack = new javax.swing.JButton();
+        btnFindLatest = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,6 +146,13 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnFindLatest.setText("Find Latest");
+        btnFindLatest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindLatestActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,8 +161,11 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
                 .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtnBack)
-                    .addComponent(btnBook)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnFindLatest)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBook))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addGap(18, 18, 18)
@@ -176,27 +193,84 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
                     .addComponent(btnSearch))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(btnBook)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBook)
+                    .addComponent(btnFindLatest))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public String convertMonth(String m){
+        String res="";
+        switch(m){
+            case "Jan":{
+                res="1";
+                break;
+            }
+            case "Feb":{
+                res="2";
+                break;
+            }
+            case "Mar":{
+                res="3";
+                break;
+            }
+            case "Apr":{
+                res="4";
+                break;
+            }
+            case "May":{
+                res="5";
+                break;
+            }
+            case "Jun":{
+                res="6";
+                break;
+            }
+            case "Jul":{
+                res="7";
+                break;
+            }
+            case "Aug":{
+                res="8";
+                break;
+            }
+            case "Sep":{
+                res="9";
+                break;
+            }
+            case "Oct":{
+                res="10";
+                break;
+            }
+            case "Nov":{
+                res="11";
+                break;
+            }
+            case "Dec":{
+                res="12";
+                break;
+            }          
+        }
+        return res;
+    }
+    
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         if(txtYear.getText().equals("") || txtDay.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Please fill in date");
         }else{
             Date d=new Date();
-        try {
-            d=DateUtil.strToDate(txtYear.getText()+"-"+comboMonth.getSelectedItem().toString()+"-"+txtDay.getText());
-        } catch (ParseException ex) {
-            Logger.getLogger(SearchFlightsJPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //先根据游客的所在地和目的地筛出航班；
-        ArrayList<Flight> l=flightSchedule.getFlightThroughAddress(cusPro.getFrom(),cusPro.getTo());
-        //再在上面筛出的航班基础上根据日期筛航班
-        ArrayList<Flight> ans=flightSchedule.getFlightListThroughDate(d, l);
-        populate(ans);
+            try {
+                d=DateUtil.strToDate(txtYear.getText()+"-"+convertMonth(comboMonth.getSelectedItem().toString())+"-"+txtDay.getText());
+            } catch (ParseException ex) {
+                Logger.getLogger(SearchFlightsJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //先根据游客的所在地和目的地筛出航班；
+            ArrayList<Flight> l=flightSchedule.getFlightThroughAddress(cusPro.getFrom(),cusPro.getTo());
+            //再在上面筛出的航班基础上根据日期筛航班
+            ArrayList<Flight> ans=flightSchedule.getFlightListThroughDate(d, l);
+            populate(ans);
         }    
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -220,10 +294,35 @@ public class SearchFlightsJPanel extends javax.swing.JPanel {
         layout.previous(cardSequence);
     }//GEN-LAST:event_BtnBackActionPerformed
 
+    private void btnFindLatestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindLatestActionPerformed
+        if(txtYear.getText().equals("") || txtDay.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Please fill in date");
+        }else{           
+            Date d=new Date();
+            try {
+                d=DateUtil.strToDate(txtYear.getText()+"-"+convertMonth(comboMonth.getSelectedItem().toString())+"-"+txtDay.getText());
+            } catch (ParseException ex) {
+                Logger.getLogger(SearchFlightsJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            ArrayList<Flight> list=flightSchedule.getFlightThroughAddress(cusPro.getFrom(),cusPro.getTo());
+            Flight f=flightSchedule.findLatest(d,list);
+            if(f==null){
+                JOptionPane.showMessageDialog(null, "Sorry! We cannot find required flights.");
+            }else{
+                BookFlightJPanel jp=new BookFlightJPanel(cardSequence,f,cusPro,assignList);
+                cardSequence.add("BookFlightJPanel",jp);
+                CardLayout l=(CardLayout)cardSequence.getLayout();
+                l.next(cardSequence);
+            }
+        }
+              
+    }//GEN-LAST:event_btnFindLatestActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBack;
     private javax.swing.JButton btnBook;
+    private javax.swing.JButton btnFindLatest;
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> comboMonth;
     private javax.swing.JLabel jLabel1;

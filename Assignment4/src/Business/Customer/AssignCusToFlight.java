@@ -10,16 +10,14 @@ import Business.Travel.Ticket;
 
 /**
  *
- * @author admin
+ * @author LRQ
  */
 public class AssignCusToFlight {
     private CustomerProfile cusPro;
     private Flight flight;
     private Ticket ticket;
 
-    public AssignCusToFlight(){
-        
-    }
+    public AssignCusToFlight(){}
     
     public AssignCusToFlight(CustomerProfile cusPro, Flight flight, Ticket ticket) {
         this.cusPro=cusPro;
