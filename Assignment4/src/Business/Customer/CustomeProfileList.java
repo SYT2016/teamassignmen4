@@ -58,13 +58,17 @@ public class CustomeProfileList {
     
     //找到所有未登记行程的游客
     public ArrayList<Customer> getCusWithoutProfile(){
-        ArrayList<Customer> l=new ArrayList<>();
+        ArrayList<Customer> ans=new ArrayList<>();
+        ArrayList<Customer> customerOfcusPro=new ArrayList<>();
+        for(CustomerProfile cp:customerProfileList){
+            customerOfcusPro.add(cp.getCustomer());
+        }
         for(Customer c:customerList.getCustomerlist()){
-            if(!customerProfileList.contains(c)){
-                l.add(c);
+            if(!customerOfcusPro.contains(c)){
+                ans.add(c);
             }
         }
-        return l;
+        return ans;
     }
     
 }

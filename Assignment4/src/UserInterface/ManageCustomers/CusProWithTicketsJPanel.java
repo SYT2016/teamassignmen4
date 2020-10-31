@@ -39,7 +39,7 @@ public class CusProWithTicketsJPanel extends javax.swing.JPanel {
             row[3]=DateUtil.totYyyyMmDd(i.getFlight().getTakeOffTime());
             row[4]=i.getFlight().getTakeOffPlace().toString();
             row[5]=i.getFlight().getLandingPlace().toString();
-            row[6]=i.getTicket().getSeat().getRow()+""+i.getTicket().getSeat().getColumn(); 
+            row[6]=i.getTicket().getSeat().getRow()+""+i.getTicket().getSeat().getSeatNo(); 
             dtm.addRow(row);
         }
     }

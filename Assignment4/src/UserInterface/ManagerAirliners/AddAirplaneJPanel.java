@@ -18,6 +18,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  *
@@ -36,6 +37,8 @@ public class AddAirplaneJPanel extends JPanel {
         this.cardSequenceJPanel = cardSequenceJPanel;
         this.airliner = airliner;
         initComponents();
+        datePickerLanding.setLocale(Locale.US);
+        datePickerTakeOff.setLocale(Locale.US);
     }
 
     /**
@@ -428,7 +431,8 @@ public class AddAirplaneJPanel extends JPanel {
 
         AirlinerDirectory.addAirliner(airliner);
         AirlinerProfileList.addAirlinerProfile(new AirlinerProfile(airliner, flight, airplane));
-       
+        //airliner1.addFlight(flight13);
+        //AirlinerProfileList.addAirlinerProfile(new AirlinerProfile(airliner1, flight13, airplane1));
         cardSequenceJPanel.remove(this);
         Component[] components=cardSequenceJPanel.getComponents();
         Component c=components[components.length-1];

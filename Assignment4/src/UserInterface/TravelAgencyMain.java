@@ -29,12 +29,14 @@ import java.util.Calendar;
  */
 public class TravelAgencyMain extends javax.swing.JFrame {
 
-    private CustomerDirectory customerDirectory;
-    private CustomeProfileList cusPros;
-    private FlightSchedule flightSchedule;
-    private AssignCusToFlightList assignList;
+    private JPanel cardSequence;
+    public static CustomerDirectory customerDirectory;
+    public static CustomeProfileList cusPros;
+    public static FlightSchedule flightSchedule;
+    public static AssignCusToFlightList assignList;
     public TravelAgencyMain() {
         initComponents();
+        this.cardSequence=CardSequenceJPanel;
         this.customerDirectory=new CustomerDirectory();
         this.flightSchedule=new FlightSchedule();
         this.cusPros=new CustomeProfileList(this.customerDirectory);
@@ -58,6 +60,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         btnAirlinerIssue = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         CardSequenceJPanel.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(CardSequenceJPanel);
@@ -86,7 +89,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
                 .addContainerGap(63, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnAirlinerIssue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCusIssues, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
+                    .addComponent(btnCusIssues, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(50, 50, 50))
         );
         jPanel1Layout.setVerticalGroup(
@@ -120,10 +123,10 @@ public class TravelAgencyMain extends javax.swing.JFrame {
 
 
     private void btnCusIssuesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCusIssuesActionPerformed
-        CusIssueWorkAreaJPanel jp = new CusIssueWorkAreaJPanel(this.CardSequenceJPanel, customerDirectory, cusPros, flightSchedule, assignList);
-        this.CardSequenceJPanel.add("CusIssueWorkAreaJPanel", jp);
-        CardLayout layout = (CardLayout) this.CardSequenceJPanel.getLayout();
-        layout.next(this.CardSequenceJPanel);
+        CusIssueWorkAreaJPanel jp = new CusIssueWorkAreaJPanel(cardSequence, TravelAgencyMain.customerDirectory, TravelAgencyMain.cusPros, TravelAgencyMain.flightSchedule, TravelAgencyMain.assignList);
+        cardSequence.add("CusIssueWorkAreaJPanel", jp);
+        CardLayout layout = (CardLayout)cardSequence.getLayout();
+        layout.next(cardSequence);
     }//GEN-LAST:event_btnCusIssuesActionPerformed
 
     private void btnAirlinerIssueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinerIssueActionPerformed

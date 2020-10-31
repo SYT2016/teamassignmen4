@@ -19,6 +19,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  *
@@ -47,6 +48,8 @@ public class ViewAirlineJPanel extends javax.swing.JPanel {
         this.cardSequenceJPanel = cardSequenceJPanel;
         this.flight = f;
         initComponents();
+        datePickerLanding.setLocale(Locale.US);
+        datePickerTakeOff.setLocale(Locale.US);
         txtAirPlaneId.setText(f.getAirplane().getAirplaneID());
         txtFlightNumber.setText(f.getFlightNumber());
         txtAirPlaneAge.setText((String.valueOf(f.getAirplane().getAirplaneAge())));
