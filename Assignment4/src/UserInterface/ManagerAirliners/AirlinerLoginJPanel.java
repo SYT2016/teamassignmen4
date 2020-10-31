@@ -40,6 +40,7 @@ public class AirlinerLoginJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtpassword = new javax.swing.JTextField();
         btnLogIn = new javax.swing.JButton();
+        btnBack1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel1.setText("Airliner Log In");
@@ -61,36 +62,45 @@ public class AirlinerLoginJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnBack1.setText("<<Back");
+        btnBack1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 86, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtAirlinerName)
-                    .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
+                        .addGap(157, 157, 157)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtAirlinerName)
+                            .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLogIn, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(211, 211, 211)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(btnLogIn)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(16, 16, 16)
+                        .addComponent(btnBack1)))
+                .addContainerGap(364, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(14, 14, 14)
+                .addComponent(btnBack1)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(38, 38, 38)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtAirlinerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -98,9 +108,9 @@ public class AirlinerLoginJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
+                .addGap(55, 55, 55)
                 .addComponent(btnLogIn)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -110,26 +120,28 @@ public class AirlinerLoginJPanel extends javax.swing.JPanel {
 
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
         java.util.List<Airliner> airlinerList = AirlinerDirectory.getAirlinerList();
-        for (Airliner a : airlinerList){
-            if (a.getName().equals(txtAirlinerName.getText()) && a.getPassword().equals(txtpassword.getText())){
+        for (Airliner a : airlinerList) {
+            if (a.getName().equals(txtAirlinerName.getText()) && a.getPassword().equals(txtpassword.getText())) {
                 //JOptionPane.showMessageDialog(null,"Log in successfully");
                 ManageAirlinersJPanel manageAirlinersJPanel = new ManageAirlinersJPanel(this.cardSequenceJPanel, a);
                 this.cardSequenceJPanel.add("ManageAirlinersJPanel", manageAirlinersJPanel);
                 CardLayout layout = (CardLayout) this.cardSequenceJPanel.getLayout();
                 layout.next(this.cardSequenceJPanel);
-            }else{
-                JOptionPane.showMessageDialog(null,"The informaton is not correct");
                 return;
             }
         }
-//        ManageAirlinersJPanel manageAirlinersJPanel = new ManageAirlinersJPanel(this.cardSequenceJPanel, airliner);
-//        this.cardSequenceJPanel.add("ManageAirlinersJPanel", manageAirlinersJPanel);
-//        CardLayout layout = (CardLayout) this.cardSequenceJPanel.getLayout();
-//        layout.next(this.cardSequenceJPanel);
+        JOptionPane.showMessageDialog(null, "The informaton is not correct");
     }//GEN-LAST:event_btnLogInActionPerformed
+
+    private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
+        cardSequenceJPanel.remove(this);
+        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+        layout.previous(cardSequenceJPanel);
+    }//GEN-LAST:event_btnBack1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack1;
     private javax.swing.JButton btnLogIn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

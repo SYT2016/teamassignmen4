@@ -56,7 +56,7 @@ public class CustomeProfileList {
         return cp;
     }
     
-    //找到所有未登记形成的游客
+    //找到所有未登记行程的游客
     public ArrayList<Customer> getCusWithoutProfile(){
         ArrayList<Customer> l=new ArrayList<>();
         for(Customer c:customerList.getCustomerlist()){

@@ -33,6 +33,7 @@ public class Flight {
      * 到达的国家，城市，机场
      */
     private Address landingPlace;
+    private int remainAvailSeat;
     private List<Seat> seatList = new ArrayList<>();
 
     public Flight() {
@@ -47,7 +48,10 @@ public class Flight {
         this.takeOffPlace = takeOffPlace;
         this.landingPlace = landingPlace;
         initSeats(this.airplane.getNumOfSeats());
-        //seatList.forEach(System.out::println);
+    }
+
+    public void remove() {
+        this.airliner.removeFlight(this);
     }
 
     private void initSeats(int seatNumber) {
@@ -92,8 +96,6 @@ public class Flight {
         return num;
     }
     
-    
-    
     //预订航班后座位信息的变化
     public void changeSeatCondition(int row,String column){
         for(Seat s:seatList){
@@ -110,6 +112,15 @@ public class Flight {
     public String toString(){
         return this.flightNumber;
     }
+
+    public int getRemainAvailSeat() {
+        return remainAvailSeat;
+    }
+
+    public void setRemainAvailSeat(int remainAvailSeat) {
+        this.remainAvailSeat = remainAvailSeat;
+    }    
+    
 
     public Airliner getAirliner() {
         return airliner;

@@ -15,6 +15,7 @@ import Util.Address;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -24,7 +25,7 @@ import java.util.Date;
  */
 public class AddAirplaneJPanel extends JPanel {
 
-    private final JPanel cardSequenceJPanel;
+    private  JPanel cardSequenceJPanel;
 
     private final Airliner airliner;
 
@@ -117,8 +118,18 @@ public class AddAirplaneJPanel extends JPanel {
                 btnAddPlaneMouseClicked(evt);
             }
         });
+        btnAddPlane.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddPlaneActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Take Off Country:");
 
@@ -367,7 +378,7 @@ public class AddAirplaneJPanel extends JPanel {
         if (takeOffMin < 0) {
             return;
         }
-        takeOffTime.set(Calendar.HOUR_OF_DAY, takeOffHour);
+        takeOffTime.set(Calendar.MINUTE, takeOffMin);
         // Landing time
         Calendar landingTime = getLandingDate();
         if (landingTime == null) {
@@ -383,6 +394,10 @@ public class AddAirplaneJPanel extends JPanel {
             return;
         }
         landingTime.set(Calendar.MINUTE, landingMin);
+        if (landingTime.compareTo(takeOffTime) <= 0) {
+            JOptionPane.showMessageDialog(this, "Landing time must be later than take off time!","Error", JOptionPane.ERROR_MESSAGE) ;
+            return;
+        }
         String flightNumber = getFlightNumber();
         if (flightNumber == null) {
             return;
@@ -413,8 +428,16 @@ public class AddAirplaneJPanel extends JPanel {
 
         AirlinerDirectory.addAirliner(airliner);
         AirlinerProfileList.addAirlinerProfile(new AirlinerProfile(airliner, flight, airplane));
-
-        ManageAirlinersJPanel.show(this.cardSequenceJPanel, this.airliner);
+       
+        cardSequenceJPanel.remove(this);
+        Component[] components=cardSequenceJPanel.getComponents();
+        Component c=components[components.length-1];
+        ManageAirlinersJPanel m=(ManageAirlinersJPanel)c;
+        m.refreshTable(airliner);
+        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+        layout.previous(cardSequenceJPanel);
+        
+        //ManageAirlinersJPanel.show(this.cardSequenceJPanel, this.airliner);
     }//GEN-LAST:event_btnAddPlaneMouseClicked
 
     private void txtLandingMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLandingMinActionPerformed
@@ -647,6 +670,31 @@ public class AddAirplaneJPanel extends JPanel {
             return -1;
         }
     }
+
+    private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
+       // cardSequenceJPanel.remove(this);
+       // Component[] componentArray = cardSequenceJPanel.getComponents();
+       // Component component = componentArray[componentArray.length - 1];
+       // ManageAirlinersJPanel manageProductCatalogJPanel = (ManageAirlinersJPanel) component;
+        //manageProductCatalogJPanel.refreshTable(airliner);
+       // CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+       // layout.previous(cardSequenceJPanel);
+    }//GEN-LAST:event_btnBackMouseClicked
+
+    private void btnAddPlaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPlaneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddPlaneActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+         cardSequenceJPanel.remove(this);
+        Component[] componentArray = cardSequenceJPanel.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        ManageAirlinersJPanel manageProductCatalogJPanel = (ManageAirlinersJPanel) component;
+        manageProductCatalogJPanel.refreshTable(airliner);
+        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+        layout.previous(cardSequenceJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddPlane;

@@ -7,9 +7,11 @@ package UserInterface.ManagerAirliners;
 
 import Business.Airliners.Airliner;
 import Business.Airliners.AirlinerDirectory;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -65,6 +67,11 @@ public class CreateAirlinerJPanel extends javax.swing.JPanel {
         });
 
         btnBack1.setText("<<Back");
+        btnBack1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack1ActionPerformed(evt);
+            }
+        });
 
         btnCreate.setText("Create!");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
@@ -134,23 +141,42 @@ public class CreateAirlinerJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        String airlinerName = txtAirlinerName.getText();
-        String airlinerCountry = txtAirlinerCountry.getText();
-        String airlinerCity = txtAirlinerCity.getText();
-        String password = txtPassword.getText();
-        Airliner airliner = new Airliner(airlinerName, airlinerCountry, airlinerCity, password);
-        AirlinerDirectory.addAirliner(airliner);
+        for(Airliner airliner:AirlinerDirectory.getAirlinerList()){
+            if (airliner.getName().equals(txtAirlinerName.getText())){
+                JOptionPane.showMessageDialog(null,"The Airliner has existed!");
+                return;
+            }
+        }
 
-        ManageAirlinersJPanel.show(this.cardSequenceJPanel, airliner);
-//        ManageAirlinersJPanel createAirlinerJPanel = new ManageAirlinersJPanel(this.cardSequenceJPanel, airliner);
-//        this.cardSequenceJPanel.add("CreateAirlinerJPanel", createAirlinerJPanel);
-//        CardLayout layout = (CardLayout) this.cardSequenceJPanel.getLayout();
-//        layout.next(this.cardSequenceJPanel);
+        if (StringUtils.isNotBlank(txtAirlinerName.getText()) &&
+                FormatConvert.isLetterOrNumber(txtAirlinerName.getText()) &&
+                StringUtils.isNotBlank(txtAirlinerCountry.getText()) &&
+                FormatConvert.inLetter(txtAirlinerCountry.getText()) &&
+                StringUtils.isNotBlank(txtAirlinerCity.getText()) &&
+                FormatConvert.inLetter(txtAirlinerCity.getText()) &&
+                StringUtils.isNotBlank(txtPassword.getText())) {
+            String airlinerName = txtAirlinerName.getText();
+            String airlinerCountry = txtAirlinerCountry.getText();
+            String airlinerCity = txtAirlinerCity.getText();
+            String password = txtPassword.getText();
+            Airliner airliner = new Airliner(airlinerName, airlinerCountry, airlinerCity, password);
+            AirlinerDirectory.addAirliner(airliner);
+
+            ManageAirlinersJPanel.show(this.cardSequenceJPanel, airliner);
+        }else{
+            JOptionPane.showMessageDialog(null,"please notice your inputing information!");
+        }
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
+
+    private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
+        cardSequenceJPanel.remove(this);
+        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+        layout.previous(cardSequenceJPanel);
+    }//GEN-LAST:event_btnBack1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

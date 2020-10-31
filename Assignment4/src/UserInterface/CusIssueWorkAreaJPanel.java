@@ -11,6 +11,7 @@ import Business.Customer.CustomerDirectory;
 import Business.Flight.FlightSchedule;
 import UserInterface.ManageCustomers.CreateCusProJPanel;
 import UserInterface.ManageCustomers.CreateNewCustomerJpanel;
+import UserInterface.ManageCustomers.CusProWithTicketsJPanel;
 import UserInterface.ManageCustomers.ViewCusProfilesJPanel;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -47,6 +48,7 @@ public class CusIssueWorkAreaJPanel extends javax.swing.JPanel {
         btnAddCus = new javax.swing.JButton();
         btnManageCus = new javax.swing.JButton();
         btnCreateCusPro = new javax.swing.JButton();
+        btnCusProWithTickets = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -56,15 +58,15 @@ public class CusIssueWorkAreaJPanel extends javax.swing.JPanel {
                 btnAddCusActionPerformed(evt);
             }
         });
-        add(btnAddCus, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 180, -1));
+        add(btnAddCus, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 270, 30));
 
-        btnManageCus.setText("Manager Customers");
+        btnManageCus.setText("Manager Cus Profiles");
         btnManageCus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageCusActionPerformed(evt);
             }
         });
-        add(btnManageCus, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 180, 30));
+        add(btnManageCus, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 270, 30));
 
         btnCreateCusPro.setText("Create Cus Profile");
         btnCreateCusPro.addActionListener(new java.awt.event.ActionListener() {
@@ -72,7 +74,15 @@ public class CusIssueWorkAreaJPanel extends javax.swing.JPanel {
                 btnCreateCusProActionPerformed(evt);
             }
         });
-        add(btnCreateCusPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 180, -1));
+        add(btnCreateCusPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 270, 30));
+
+        btnCusProWithTickets.setText("Cus Profiles With Tickets");
+        btnCusProWithTickets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCusProWithTicketsActionPerformed(evt);
+            }
+        });
+        add(btnCusProWithTickets, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 270, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCusActionPerformed
@@ -96,10 +106,18 @@ public class CusIssueWorkAreaJPanel extends javax.swing.JPanel {
         l.next(cardSequence);
     }//GEN-LAST:event_btnCreateCusProActionPerformed
 
+    private void btnCusProWithTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCusProWithTicketsActionPerformed
+        CusProWithTicketsJPanel jp=new CusProWithTicketsJPanel(cardSequence,assignList);
+        cardSequence.add("CusProWithTicketsJPanel",jp);
+        CardLayout l=(CardLayout)cardSequence.getLayout();
+        l.next(cardSequence);
+    }//GEN-LAST:event_btnCusProWithTicketsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddCus;
     private javax.swing.JButton btnCreateCusPro;
+    private javax.swing.JButton btnCusProWithTickets;
     private javax.swing.JButton btnManageCus;
     // End of variables declaration//GEN-END:variables
 }

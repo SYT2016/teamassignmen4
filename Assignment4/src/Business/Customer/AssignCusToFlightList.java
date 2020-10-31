@@ -9,9 +9,10 @@ import java.util.ArrayList;
 
 /**
  *
- * @author admin
+ * @author LRQ
  */
 public class AssignCusToFlightList {
+    //private ArrayList<AssignCusToFlight> cusPros;
     private ArrayList<AssignCusToFlight> actfList;
     
     public AssignCusToFlightList(){

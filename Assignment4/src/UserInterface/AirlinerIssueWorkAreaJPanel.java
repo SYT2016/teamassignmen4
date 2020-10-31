@@ -5,12 +5,15 @@
  */
 package UserInterface;
 
+import Business.Airliners.Airliner;
 import Business.Customer.AssignCusToFlightList;
 import Business.Customer.CustomeProfileList;
 import Business.Customer.CustomerDirectory;
 import Business.Flight.FlightSchedule;
 import UserInterface.ManagerAirliners.AirlinerLoginJPanel;
 import UserInterface.ManagerAirliners.CreateAirlinerJPanel;
+import UserInterface.ManagerAirliners.ManageAirlinersJPanel;
+
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -30,6 +33,13 @@ public class AirlinerIssueWorkAreaJPanel extends javax.swing.JPanel {
         this.cardSequence=cardSequence;
     }
 
+    public static void show(JPanel cardSequenceJPanel) {
+        AirlinerIssueWorkAreaJPanel airlinerIssueWorkAreaJPanel = new AirlinerIssueWorkAreaJPanel(cardSequenceJPanel);
+        cardSequenceJPanel.add("AirlinerIssueWorkAreaJPanel", airlinerIssueWorkAreaJPanel);
+        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+        layout.next(cardSequenceJPanel);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,7 +51,6 @@ public class AirlinerIssueWorkAreaJPanel extends javax.swing.JPanel {
 
         btnAddAirliner = new javax.swing.JButton();
         btnLogInAirliner = new javax.swing.JButton();
-        btnManageAirliner = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -60,14 +69,6 @@ public class AirlinerIssueWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         add(btnLogInAirliner, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 170, -1));
-
-        btnManageAirliner.setText("Manager Airliners");
-        btnManageAirliner.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageAirlinerActionPerformed(evt);
-            }
-        });
-        add(btnManageAirliner, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddAirlinerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAirlinerActionPerformed
@@ -88,14 +89,9 @@ public class AirlinerIssueWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(cardSequence);
     }//GEN-LAST:event_btnLogInAirlinerActionPerformed
 
-    private void btnManageAirlinerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageAirlinerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnManageAirlinerActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddAirliner;
     private javax.swing.JButton btnLogInAirliner;
-    private javax.swing.JButton btnManageAirliner;
     // End of variables declaration//GEN-END:variables
 }

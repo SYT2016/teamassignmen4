@@ -13,7 +13,7 @@ public class DateUtil {
     }
     
     public static Date strToDate(String date) throws ParseException{
-        DateFormat format = new SimpleDateFormat("YYYY-MM-dd");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.parse(date);
     }
 }
